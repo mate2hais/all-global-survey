@@ -16,6 +16,7 @@ import { Route as ConfidentialitateRouteImport } from './routes/confidentialitat
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DespreRouteImport } from './routes/despre'
 import { Route as IntrebariFrecventeRouteImport } from './routes/intrebari-frecvente'
+import { Route as NoutatiRouteImport } from './routes/noutati'
 import { Route as PreturiRouteImport } from './routes/preturi'
 import { Route as ProcesRouteImport } from './routes/proces'
 import { Route as ServiciiRouteImport } from './routes/servicii'
@@ -58,6 +59,11 @@ const DespreRoute = DespreRouteImport.update({
 const IntrebariFrecventeRoute = IntrebariFrecventeRouteImport.update({
   id: '/intrebari-frecvente',
   path: '/intrebari-frecvente',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NoutatiRoute = NoutatiRouteImport.update({
+  id: '/noutati',
+  path: '/noutati',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PreturiRoute = PreturiRouteImport.update({
@@ -114,6 +120,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/despre': typeof DespreRoute
   '/intrebari-frecvente': typeof IntrebariFrecventeRoute
+  '/noutati': typeof NoutatiRoute
   '/preturi': typeof PreturiRoute
   '/proces': typeof ProcesRoute
   '/servicii': typeof ServiciiRoute
@@ -131,6 +138,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/despre': typeof DespreRoute
   '/intrebari-frecvente': typeof IntrebariFrecventeRoute
+  '/noutati': typeof NoutatiRoute
   '/preturi': typeof PreturiRoute
   '/proces': typeof ProcesRoute
   '/servicii': typeof ServiciiRoute
@@ -150,6 +158,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/despre': typeof DespreRoute
   '/intrebari-frecvente': typeof IntrebariFrecventeRoute
+  '/noutati': typeof NoutatiRoute
   '/preturi': typeof PreturiRoute
   '/proces': typeof ProcesRoute
   '/servicii': typeof ServiciiRoute
@@ -169,6 +178,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/despre'
     | '/intrebari-frecvente'
+    | '/noutati'
     | '/preturi'
     | '/proces'
     | '/servicii'
@@ -186,6 +196,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/despre'
     | '/intrebari-frecvente'
+    | '/noutati'
     | '/preturi'
     | '/proces'
     | '/servicii'
@@ -204,6 +215,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/despre'
     | '/intrebari-frecvente'
+    | '/noutati'
     | '/preturi'
     | '/proces'
     | '/servicii'
@@ -223,6 +235,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   DespreRoute: typeof DespreRoute
   IntrebariFrecventeRoute: typeof IntrebariFrecventeRoute
+  NoutatiRoute: typeof NoutatiRoute
   PreturiRoute: typeof PreturiRoute
   ProcesRoute: typeof ProcesRoute
   ServiciiRoute: typeof ServiciiRoute
@@ -282,6 +295,13 @@ declare module '@tanstack/react-router' {
       path: '/intrebari-frecvente'
       fullPath: '/intrebari-frecvente'
       preLoaderRoute: typeof IntrebariFrecventeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/noutati': {
+      id: '/noutati'
+      path: '/noutati'
+      fullPath: '/noutati'
+      preLoaderRoute: typeof NoutatiRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/preturi': {
@@ -369,6 +389,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   DespreRoute: DespreRoute,
   IntrebariFrecventeRoute: IntrebariFrecventeRoute,
+  NoutatiRoute: NoutatiRoute,
   PreturiRoute: PreturiRoute,
   ProcesRoute: ProcesRoute,
   ServiciiRoute: ServiciiRoute,
