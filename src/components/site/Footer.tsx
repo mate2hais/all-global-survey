@@ -69,6 +69,11 @@ export function Footer() {
               </Link>
             </li>
             <li>
+              <Link to="/noutati" className="hover:underline">
+                Noutăți și reglementări
+              </Link>
+            </li>
+            <li>
               <Link to="/termeni" className="hover:underline">
                 Termeni și condiții
               </Link>
