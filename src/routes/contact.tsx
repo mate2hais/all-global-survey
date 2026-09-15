@@ -122,8 +122,8 @@ function ContactPage() {
       });
 
       toast.success(
-        result.smsSent
-          ? "Solicitare trimisă! Ați primit o confirmare prin SMS și pe email."
+        result.emailSent
+          ? "Solicitare trimisă! Ați primit o confirmare pe email."
           : "Solicitare trimisă! Vă contactez în cel mai scurt timp.",
       );
       form.reset();

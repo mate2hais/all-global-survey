@@ -11,7 +11,59 @@ export interface RequestPayload {
   localitate: string;
   tip: string;
   mesaj?: string | null;
-  files: { file_name: string; path: string }[];
+  files: { file_name: string; path: string; url?: string | null }[];
+}
+
+/** Confirmare către solicitant + notificare completă către auditor. */
+export async function sendRequestEmails(
+  payload: RequestPayload,
+): Promise<{ confirmationSent: boolean; noticeSent: boolean }> {
+  const { sendTemplateEmail } = await import("@/lib/email-templates/send-email");
+  const data = new Date().toLocaleString("ro-RO", { timeZone: "Europe/Bucharest" });
+
+  let confirmationSent = false;
+  if (payload.email) {
+    try {
+      const res = await sendTemplateEmail("solicitare-confirmare", payload.email, {
+        idempotencyKey: `solicitare-confirmare-${payload.id}`,
+        templateData: {
+          nume: payload.nume,
+          telefon: payload.telefon,
+          localitate: payload.localitate,
+          tip: payload.tip,
+          mesaj: payload.mesaj ?? "",
+          fisiere: payload.files.map((f) => f.file_name),
+        },
+      });
+      confirmationSent = res.sent;
+    } catch (e) {
+      console.error("Email confirmare eșuat:", e);
+    }
+  }
+
+  let noticeSent = false;
+  try {
+    const res = await sendTemplateEmail("solicitare-notificare", "", {
+      idempotencyKey: `solicitare-notificare-${payload.id}`,
+      ...(payload.email ? { replyTo: payload.email } : {}),
+      templateData: {
+        id: payload.id,
+        nume: payload.nume,
+        telefon: payload.telefon,
+        email: payload.email ?? "",
+        localitate: payload.localitate,
+        tip: payload.tip,
+        mesaj: payload.mesaj ?? "",
+        data,
+        fisiere: payload.files.map((f) => ({ name: f.file_name, url: f.url ?? null })),
+      },
+    });
+    noticeSent = res.sent;
+  } catch (e) {
+    console.error("Email notificare auditor eșuat:", e);
+  }
+
+  return { confirmationSent, noticeSent };
 }
 
 const GATEWAY_URL = "https://connector-gateway.lovable.dev/twilio";
