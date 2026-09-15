@@ -54,22 +54,41 @@ export const submitAuditRequest = createServerFn({ method: "POST" })
       if (filesError) console.error("Insert fișiere eșuat:", filesError);
     }
 
-    const { sendConfirmationSms } = await import("./notify.server");
+    const files: { file_name: string; path: string; url: string | null }[] = [];
+    for (const f of data.files) {
+      const { data: signed } = await supabaseAdmin.storage
+        .from("solicitari")
+        .createSignedUrl(f.path, 60 * 60 * 24 * 7);
+      files.push({ file_name: f.file_name, path: f.path, url: signed?.signedUrl ?? null });
+    }
+
+    const payload = {
+      id: inserted.id,
+      nume: data.nume,
+      telefon: data.telefon,
+      email: data.email || null,
+      localitate: data.localitate,
+      tip: data.tip,
+      mesaj: data.mesaj || null,
+      files,
+    };
+
+    const { sendConfirmationSms, sendRequestEmails } = await import("./notify.server");
+
     let smsSent = false;
     try {
-      smsSent = await sendConfirmationSms({
-        id: inserted.id,
-        nume: data.nume,
-        telefon: data.telefon,
-        email: data.email || null,
-        localitate: data.localitate,
-        tip: data.tip,
-        mesaj: data.mesaj || null,
-        files: data.files.map((f) => ({ file_name: f.file_name, path: f.path })),
-      });
+      smsSent = await sendConfirmationSms(payload);
     } catch (e) {
       console.error("Notificare SMS eșuată:", e);
     }
 
-    return { id: inserted.id, smsSent };
+    let emailSent = false;
+    try {
+      const emails = await sendRequestEmails(payload);
+      emailSent = emails.confirmationSent;
+    } catch (e) {
+      console.error("Notificări email eșuate:", e);
+    }
+
+    return { id: inserted.id, smsSent, emailSent };
   });
