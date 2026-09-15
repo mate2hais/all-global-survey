@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
 import { CONTACT, PRICING } from "@/lib/site-data";
+import { getPublicPrices } from "@/lib/public-content.functions";
 
 const TITLE = "Prețuri certificat și audit energetic Galați — tarife orientative";
 const DESC =
@@ -21,10 +22,26 @@ export const Route = createFileRoute("/preturi")({
     ],
     links: [{ rel: "canonical", href: "/preturi" }],
   }),
+  loader: () => getPublicPrices(),
+  errorComponent: () => (
+    <div className="mx-auto max-w-3xl px-6 py-24 text-center">
+      <h1 className="text-2xl font-bold">Tarifele nu pot fi afișate momentan</h1>
+      <p className="mt-3 text-muted-foreground">
+        Vă rugăm reîncărcați pagina sau sunați la {CONTACT.phoneDisplay}.
+      </p>
+    </div>
+  ),
+  notFoundComponent: () => (
+    <div className="mx-auto max-w-3xl px-6 py-24 text-center">
+      <h1 className="text-2xl font-bold">Pagina nu a fost găsită</h1>
+    </div>
+  ),
   component: PreturiPage,
 });
 
 function PreturiPage() {
+  const dbRows = Route.useLoaderData();
+  const rows = dbRows.length > 0 ? dbRows : PRICING;
   return (
     <>
       <PageHero
@@ -52,7 +69,7 @@ function PreturiPage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-border">
-                  {PRICING.map((row, i) => (
+                  {rows.map((row, i) => (
                     <tr key={i} className="hover:bg-muted/30 transition-colors">
                       <td className="px-5 py-4 align-top font-medium">{row.service}</td>
                       <td className="px-5 py-4 align-top whitespace-nowrap gradient-text font-bold">
