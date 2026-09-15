@@ -21,26 +21,6 @@ export function Footer() {
             consultanță NZEB și surse regenerabile, în municipiul Galați și în tot județul Galați.
             Fiecare lucrare include vizită obligatorie la fața locului.
           </p>
-          <div className="mt-5 flex gap-3">
-            <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Facebook"
-              className="flex size-9 items-center justify-center rounded-md bg-primary-foreground/10 transition-colors hover:bg-primary-foreground/20"
-            >
-              <Facebook className="size-4" />
-            </a>
-            <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-              className="flex size-9 items-center justify-center rounded-md bg-primary-foreground/10 transition-colors hover:bg-primary-foreground/20"
-            >
-              <Linkedin className="size-4" />
-            </a>
-          </div>
         </div>
 
         <div>

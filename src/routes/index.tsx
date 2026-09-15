@@ -83,8 +83,8 @@ function Index() {
           </div>
           <dl className="mt-12 grid max-w-3xl grid-cols-2 gap-6 border-t border-primary-foreground/20 pt-8 md:grid-cols-4">
             {[
-              ["12+", "ani de experiență"],
-              ["1.800+", "documente emise"],
+              ["4+", "ani de experiență"],
+              ["600+", "documente emise"],
               ["100%", "vizite la fața locului"],
               ["1–3 zile", "termen certificat"],
             ].map(([v, l]) => (
