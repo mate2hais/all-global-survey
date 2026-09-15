@@ -14,16 +14,239 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      admin_emails: {
+        Row: {
+          email: string
+        }
+        Insert: {
+          email: string
+        }
+        Update: {
+          email?: string
+        }
+        Relationships: []
+      }
+      audit_requests: {
+        Row: {
+          created_at: string
+          email: string | null
+          id: string
+          localitate: string
+          mesaj: string | null
+          notes: string | null
+          nume: string
+          status: string
+          telefon: string
+          tip: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          localitate: string
+          mesaj?: string | null
+          notes?: string | null
+          nume: string
+          status?: string
+          telefon: string
+          tip: string
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          localitate?: string
+          mesaj?: string | null
+          notes?: string | null
+          nume?: string
+          status?: string
+          telefon?: string
+          tip?: string
+        }
+        Relationships: []
+      }
+      gallery_images: {
+        Row: {
+          created_at: string
+          id: string
+          image_url: string
+          sort_order: number
+          storage_path: string | null
+          title: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          image_url: string
+          sort_order?: number
+          storage_path?: string | null
+          title?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          image_url?: string
+          sort_order?: number
+          storage_path?: string | null
+          title?: string | null
+        }
+        Relationships: []
+      }
+      news: {
+        Row: {
+          category: string
+          content: string
+          created_at: string
+          excerpt: string | null
+          id: string
+          image_url: string | null
+          published: boolean
+          published_at: string
+          title: string
+        }
+        Insert: {
+          category?: string
+          content?: string
+          created_at?: string
+          excerpt?: string | null
+          id?: string
+          image_url?: string | null
+          published?: boolean
+          published_at?: string
+          title: string
+        }
+        Update: {
+          category?: string
+          content?: string
+          created_at?: string
+          excerpt?: string | null
+          id?: string
+          image_url?: string | null
+          published?: boolean
+          published_at?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      prices: {
+        Row: {
+          active: boolean
+          created_at: string
+          delivery: string
+          id: string
+          note: string | null
+          price: string
+          service: string
+          sort_order: number
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          delivery: string
+          id?: string
+          note?: string | null
+          price: string
+          service: string
+          sort_order?: number
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          delivery?: string
+          id?: string
+          note?: string | null
+          price?: string
+          service?: string
+          sort_order?: number
+        }
+        Relationships: []
+      }
+      request_files: {
+        Row: {
+          content_type: string | null
+          created_at: string
+          file_name: string
+          id: string
+          path: string
+          request_id: string
+          size_bytes: number | null
+        }
+        Insert: {
+          content_type?: string | null
+          created_at?: string
+          file_name: string
+          id?: string
+          path: string
+          request_id: string
+          size_bytes?: number | null
+        }
+        Update: {
+          content_type?: string | null
+          created_at?: string
+          file_name?: string
+          id?: string
+          path?: string
+          request_id?: string
+          size_bytes?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "request_files_request_id_fkey"
+            columns: ["request_id"]
+            isOneToOne: false
+            referencedRelation: "audit_requests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      site_stats: {
+        Row: {
+          key: string
+          label: string
+          value: number
+        }
+        Insert: {
+          key: string
+          label?: string
+          value?: number
+        }
+        Update: {
+          key?: string
+          label?: string
+          value?: number
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_admin: { Args: never; Returns: boolean }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +373,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin"],
+    },
   },
 } as const
