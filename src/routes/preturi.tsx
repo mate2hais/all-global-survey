@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
 import { CONTACT, PRICING } from "@/lib/site-data";
+import { getPublicPrices } from "@/lib/public-content.functions";
 
 const TITLE = "Prețuri certificat și audit energetic Galați — tarife orientative";
 const DESC =
