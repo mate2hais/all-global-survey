@@ -25,7 +25,7 @@ const portret = portretAsset.url;
 
 const TITLE = "Despre Iulian Gabriel Panainte — Auditor Energetic Gradul I, Galați";
 const DESC =
-  "Auditor energetic pentru clădiri, Grad I, atestat CAA nr. 02471. Peste 12 ani de experiență în audituri energetice, studii SER / nZEB pentru clădiri publice, rezidențiale, administrative, medicale și educaționale.";
+  "Auditor energetic pentru clădiri, Grad I, atestat CAA nr. 02471. Peste 4 ani de experiență în audituri energetice, studii SER / nZEB pentru clădiri publice, rezidențiale, administrative, medicale și educaționale.";
 
 export const Route = createFileRoute("/despre")({
   head: () => ({
@@ -142,7 +142,7 @@ function DesprePage() {
       <PageHero
         eyebrow="Despre"
         title="Iulian Gabriel Panainte, Auditor Energetic Gradul I"
-        description="Auditor energetic pentru clădiri, atestat CAA nr. 02471 / 22.02.2021. Peste 12 ani de activitate în evaluarea performanței energetice a clădirilor din Galați și din județ, cu peste 1.800 de certificate și audituri emise."
+        description="Auditor energetic pentru clădiri, atestat CAA nr. 02471 / 22.02.2021. Peste 4 ani de activitate în evaluarea performanței energetice a clădirilor din Galați și din județ, cu peste 600 de documente și lucrări realizate."
       />
 
       <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 lg:grid-cols-[minmax(0,380px)_1fr]">

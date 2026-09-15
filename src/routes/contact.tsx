@@ -37,6 +37,8 @@ export const Route = createFileRoute("/contact")({
 });
 
 const TYPES = [
+  "CPE (Certificat de performanță energetică)",
+  "Audit energetic",
   "Apartament",
   "Casă / locuință individuală",
   "Bloc de locuințe (asociație)",

@@ -83,8 +83,8 @@ function Index() {
           </div>
           <dl className="mt-12 grid max-w-3xl grid-cols-2 gap-6 border-t border-primary-foreground/20 pt-8 md:grid-cols-4">
             {[
-              ["12+", "ani de experiență"],
-              ["1.800+", "documente emise"],
+              ["4+", "ani de experiență"],
+              ["600+", "documente emise"],
               ["100%", "vizite la fața locului"],
               ["1–3 zile", "termen certificat"],
             ].map(([v, l]) => (
@@ -94,6 +94,13 @@ function Index() {
               </div>
             ))}
           </dl>
+          <p className="mt-6 max-w-3xl rounded-xl border border-primary-foreground/20 bg-primary-foreground/10 p-5 text-sm leading-relaxed opacity-90 backdrop-blur-sm">
+            Conform memoriului de activitate și registrului de evidență, au fost realizate în total{" "}
+            <strong className="font-semibold">146 de lucrări</strong>, dintre care{" "}
+            <strong className="font-semibold">132 certificate de performanță energetică</strong>,{" "}
+            <strong className="font-semibold">6 audituri energetice pentru clădiri</strong> și{" "}
+            <strong className="font-semibold">13 studii nZEB / SER</strong>.
+          </p>
         </div>
       </section>
 
