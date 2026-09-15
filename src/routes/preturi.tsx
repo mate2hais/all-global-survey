@@ -22,10 +22,26 @@ export const Route = createFileRoute("/preturi")({
     ],
     links: [{ rel: "canonical", href: "/preturi" }],
   }),
+  loader: () => getPublicPrices(),
+  errorComponent: () => (
+    <div className="mx-auto max-w-3xl px-6 py-24 text-center">
+      <h1 className="text-2xl font-bold">Tarifele nu pot fi afișate momentan</h1>
+      <p className="mt-3 text-muted-foreground">
+        Vă rugăm reîncărcați pagina sau sunați la {CONTACT.phoneDisplay}.
+      </p>
+    </div>
+  ),
+  notFoundComponent: () => (
+    <div className="mx-auto max-w-3xl px-6 py-24 text-center">
+      <h1 className="text-2xl font-bold">Pagina nu a fost găsită</h1>
+    </div>
+  ),
   component: PreturiPage,
 });
 
 function PreturiPage() {
+  const dbRows = Route.useLoaderData();
+  const rows = dbRows.length > 0 ? dbRows : PRICING;
   return (
     <>
       <PageHero
