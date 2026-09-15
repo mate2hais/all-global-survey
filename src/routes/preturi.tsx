@@ -69,7 +69,7 @@ function PreturiPage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-border">
-                  {PRICING.map((row, i) => (
+                  {rows.map((row, i) => (
                     <tr key={i} className="hover:bg-muted/30 transition-colors">
                       <td className="px-5 py-4 align-top font-medium">{row.service}</td>
                       <td className="px-5 py-4 align-top whitespace-nowrap gradient-text font-bold">
