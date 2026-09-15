@@ -88,10 +88,15 @@ export function Footer() {
       </div>
 
       <div className="border-t border-primary-foreground/15">
-        <p className="mx-auto max-w-7xl px-6 py-5 text-xs opacity-75">
-          © {new Date().getFullYear()} {CONTACT.name} — Auditor Energetic Gradul I, Galați. Toate
-          drepturile rezervate.
-        </p>
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-6 py-5 text-xs opacity-75">
+          <p>
+            © {new Date().getFullYear()} {CONTACT.name} — Auditor Energetic Gradul I, Galați. Toate
+            drepturile rezervate.
+          </p>
+          <Link to="/auth" className="hover:underline">
+            Administrare
+          </Link>
+        </div>
       </div>
     </footer>
   );

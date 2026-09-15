@@ -92,8 +92,8 @@ function ContactPage() {
       const uploaded: {
         path: string;
         file_name: string;
-        content_type?: string;
-        size_bytes?: number;
+        content_type?: string | undefined;
+        size_bytes?: number | undefined;
       }[] = [];
 
       for (const file of files) {
