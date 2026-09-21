@@ -11,6 +11,7 @@ const NAV = [
   { to: "/proces", label: "Proces" },
   { to: "/zona-de-acoperire", label: "Zonă de acoperire" },
   { to: "/preturi", label: "Prețuri" },
+  { to: "/galerie", label: "Galerie" },
   { to: "/testimoniale", label: "Testimoniale" },
   { to: "/blog", label: "Blog" },
   { to: "/intrebari-frecvente", label: "FAQ" },

@@ -133,6 +133,7 @@ export type Database = {
           created_at: string
           id: string
           image_url: string
+          published: boolean
           sort_order: number
           storage_path: string | null
           title: string | null
@@ -141,6 +142,7 @@ export type Database = {
           created_at?: string
           id?: string
           image_url: string
+          published?: boolean
           sort_order?: number
           storage_path?: string | null
           title?: string | null
@@ -149,6 +151,7 @@ export type Database = {
           created_at?: string
           id?: string
           image_url?: string
+          published?: boolean
           sort_order?: number
           storage_path?: string | null
           title?: string | null

@@ -64,6 +64,11 @@ export function Footer() {
               </Link>
             </li>
             <li>
+              <Link to="/galerie" className="hover:underline">
+                Galerie lucrări
+              </Link>
+            </li>
+            <li>
               <Link to="/blog" className="hover:underline">
                 Blog
               </Link>
