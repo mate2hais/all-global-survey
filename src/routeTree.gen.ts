@@ -15,6 +15,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ConfidentialitateRouteImport } from './routes/confidentialitate'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DespreRouteImport } from './routes/despre'
+import { Route as GalerieRouteImport } from './routes/galerie'
 import { Route as IntrebariFrecventeRouteImport } from './routes/intrebari-frecvente'
 import { Route as NoutatiRouteImport } from './routes/noutati'
 import { Route as PreturiRouteImport } from './routes/preturi'
@@ -59,6 +60,11 @@ const ContactRoute = ContactRouteImport.update({
 const DespreRoute = DespreRouteImport.update({
   id: '/despre',
   path: '/despre',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalerieRoute = GalerieRouteImport.update({
+  id: '/galerie',
+  path: '/galerie',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IntrebariFrecventeRoute = IntrebariFrecventeRouteImport.update({
@@ -152,6 +158,7 @@ export interface FileRoutesByFullPath {
   '/confidentialitate': typeof ConfidentialitateRoute
   '/contact': typeof ContactRoute
   '/despre': typeof DespreRoute
+  '/galerie': typeof GalerieRoute
   '/intrebari-frecvente': typeof IntrebariFrecventeRoute
   '/noutati': typeof NoutatiRoute
   '/preturi': typeof PreturiRoute
@@ -175,6 +182,7 @@ export interface FileRoutesByTo {
   '/confidentialitate': typeof ConfidentialitateRoute
   '/contact': typeof ContactRoute
   '/despre': typeof DespreRoute
+  '/galerie': typeof GalerieRoute
   '/intrebari-frecvente': typeof IntrebariFrecventeRoute
   '/noutati': typeof NoutatiRoute
   '/preturi': typeof PreturiRoute
@@ -200,6 +208,7 @@ export interface FileRoutesById {
   '/confidentialitate': typeof ConfidentialitateRoute
   '/contact': typeof ContactRoute
   '/despre': typeof DespreRoute
+  '/galerie': typeof GalerieRoute
   '/intrebari-frecvente': typeof IntrebariFrecventeRoute
   '/noutati': typeof NoutatiRoute
   '/preturi': typeof PreturiRoute
@@ -225,6 +234,7 @@ export interface FileRouteTypes {
     | '/confidentialitate'
     | '/contact'
     | '/despre'
+    | '/galerie'
     | '/intrebari-frecvente'
     | '/noutati'
     | '/preturi'
@@ -248,6 +258,7 @@ export interface FileRouteTypes {
     | '/confidentialitate'
     | '/contact'
     | '/despre'
+    | '/galerie'
     | '/intrebari-frecvente'
     | '/noutati'
     | '/preturi'
@@ -272,6 +283,7 @@ export interface FileRouteTypes {
     | '/confidentialitate'
     | '/contact'
     | '/despre'
+    | '/galerie'
     | '/intrebari-frecvente'
     | '/noutati'
     | '/preturi'
@@ -297,6 +309,7 @@ export interface RootRouteChildren {
   ConfidentialitateRoute: typeof ConfidentialitateRoute
   ContactRoute: typeof ContactRoute
   DespreRoute: typeof DespreRoute
+  GalerieRoute: typeof GalerieRoute
   IntrebariFrecventeRoute: typeof IntrebariFrecventeRoute
   NoutatiRoute: typeof NoutatiRoute
   PreturiRoute: typeof PreturiRoute
@@ -354,6 +367,13 @@ declare module '@tanstack/react-router' {
       path: '/despre'
       fullPath: '/despre'
       preLoaderRoute: typeof DespreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/galerie': {
+      id: '/galerie'
+      path: '/galerie'
+      fullPath: '/galerie'
+      preLoaderRoute: typeof GalerieRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/intrebari-frecvente': {
@@ -493,6 +513,7 @@ const rootRouteChildren: RootRouteChildren = {
   ConfidentialitateRoute: ConfidentialitateRoute,
   ContactRoute: ContactRoute,
   DespreRoute: DespreRoute,
+  GalerieRoute: GalerieRoute,
   IntrebariFrecventeRoute: IntrebariFrecventeRoute,
   NoutatiRoute: NoutatiRoute,
   PreturiRoute: PreturiRoute,
