@@ -16,7 +16,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/site/Reveal";
 import { CONTACT, SERVICES, AREAS, TESTIMONIALS } from "@/lib/site-data";
-import { getSiteContent } from "@/lib/public-content.functions";
+import { getSiteContent, getPublicGallery } from "@/lib/public-content.functions";
 import heroImg from "@/assets/hero-cladiri.jpg";
 import termografieImg from "@/assets/termografie.jpg";
 import {
