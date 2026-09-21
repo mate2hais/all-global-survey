@@ -16,6 +16,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/site/Reveal";
 import { CONTACT, SERVICES, AREAS, TESTIMONIALS } from "@/lib/site-data";
+import { getSiteContent } from "@/lib/public-content.functions";
 import heroImg from "@/assets/hero-cladiri.jpg";
 import termografieImg from "@/assets/termografie.jpg";
 import {
@@ -32,6 +33,7 @@ const DESC =
   "Auditor energetic atestat Gradul I în Galați: certificate de performanță energetică, audituri pentru clădiri și industrie, consultanță NZEB și SER. Sună la 0773.932.496.";
 
 export const Route = createFileRoute("/")({
+  loader: () => getSiteContent(),
   head: () => ({
     meta: [
       { title: TITLE },
@@ -49,8 +51,15 @@ export const Route = createFileRoute("/")({
 const ICONS = [Home, Building2, Factory, Sun, Sun, Building2];
 
 function Index() {
+  const content = Route.useLoaderData();
+  const anunt = content["anunt_bara"]?.trim();
   return (
     <>
+      {anunt && (
+        <div className="bg-accent px-6 py-3 text-center text-sm font-medium text-accent-foreground">
+          {anunt}
+        </div>
+      )}
       <section className="relative isolate overflow-hidden">
         <img
           src={heroImg}
@@ -65,11 +74,12 @@ function Index() {
             <BadgeCheck className="size-3.5" /> Atestat Gradul I · Ministerul Dezvoltării
           </span>
           <h1 className="mt-5 max-w-4xl text-3xl leading-tight font-bold md:text-5xl lg:text-6xl">
-            Iulian Gabriel Panainte — Auditor Energetic Gradul I în Galați
+            {content["home_hero_title"]?.trim() ||
+              "Iulian Gabriel Panainte — Auditor Energetic Gradul I în Galați"}
           </h1>
           <p className="mt-5 max-w-2xl text-base opacity-90 md:text-xl">
-            Certificate de performanță energetică, audituri pentru clădiri și obiective industriale,
-            consultanță NZEB și surse regenerabile. Fiecare lucrare include vizită la fața locului.
+            {content["home_hero_subtitle"]?.trim() ||
+              "Certificate de performanță energetică, audituri pentru clădiri și obiective industriale, consultanță NZEB și surse regenerabile. Fiecare lucrare include vizită la fața locului."}
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button asChild variant="cta" size="xl">
