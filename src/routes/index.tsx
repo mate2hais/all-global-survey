@@ -33,7 +33,10 @@ const DESC =
   "Auditor energetic atestat Gradul I în Galați: certificate de performanță energetică, audituri pentru clădiri și industrie, consultanță NZEB și SER. Sună la 0773.932.496.";
 
 export const Route = createFileRoute("/")({
-  loader: () => getSiteContent(),
+  loader: async () => {
+    const [content, gallery] = await Promise.all([getSiteContent(), getPublicGallery()]);
+    return { content, gallery };
+  },
   head: () => ({
     meta: [
       { title: TITLE },
