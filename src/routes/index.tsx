@@ -272,6 +272,33 @@ function Index() {
         </div>
       </section>
 
+      {gallery.length > 0 && (
+        <section className="bg-muted/40 py-20">
+          <div className="mx-auto max-w-7xl px-6">
+            <Reveal>
+              <h2 className="text-2xl font-bold md:text-4xl">Galerie lucrări</h2>
+              <p className="mt-3 max-w-2xl text-muted-foreground">
+                Imagini din activitatea de certificare și audit energetic.
+              </p>
+            </Reveal>
+            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {gallery.map((img, i) => (
+                <Reveal key={img.id} delay={i * 60}>
+                  <div className="surface-card overflow-hidden p-0">
+                    <img
+                      src={img.url}
+                      alt={img.title}
+                      loading="lazy"
+                      className="h-56 w-full object-cover"
+                    />
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       <section className="pb-24">
         <div className="mx-auto max-w-7xl px-6">
           <Reveal>
