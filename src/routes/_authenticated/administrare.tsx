@@ -246,7 +246,7 @@ function AdminPage() {
           <TabsTrigger value="testimonials">Testimoniale</TabsTrigger>
           <TabsTrigger value="faq">Întrebări frecvente</TabsTrigger>
           <TabsTrigger value="texts">Texte site</TabsTrigger>
-          <TabsTrigger value="gallery">Imagini</TabsTrigger>
+          <TabsTrigger value="gallery">Galerie lucrări</TabsTrigger>
           <TabsTrigger value="stats">Indicatori</TabsTrigger>
         </TabsList>
 
@@ -721,7 +721,7 @@ function GalleryPanel({ rows, onChanged }: { rows: GalleryRow[]; onChanged: () =
     <div className="space-y-6">
       <div className="surface-card p-6">
         <Label htmlFor="galerie-upload" className="font-semibold">
-          Încarcă imagini pentru site
+          Galerie lucrări — încarcă imagini
         </Label>
         <Input
           id="galerie-upload"
