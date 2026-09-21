@@ -282,7 +282,7 @@ function Index() {
               </p>
             </Reveal>
             <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {gallery.map((img, i) => (
+              {gallery.slice(0, 6).map((img, i) => (
                 <Reveal key={img.id} delay={i * 60}>
                   <div className="surface-card overflow-hidden p-0">
                     <img
@@ -295,6 +295,13 @@ function Index() {
                 </Reveal>
               ))}
             </div>
+            <Reveal>
+              <div className="mt-8">
+                <Button asChild variant="outline">
+                  <Link to="/galerie">Vezi toată galeria</Link>
+                </Button>
+              </div>
+            </Reveal>
           </div>
         </section>
       )}
