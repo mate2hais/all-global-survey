@@ -3,12 +3,37 @@ import { ArrowLeft, CalendarDays, Clock, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/site/Reveal";
 import { CONTACT, POSTS } from "@/lib/site-data";
+import { getPublicBlogPosts } from "@/lib/public-content.functions";
 
 export const Route = createFileRoute("/blog/$slug")({
-  loader: ({ params }) => {
-    const post = POSTS.find((p) => p.slug === params.slug);
-    if (!post) throw notFound();
-    return { post };
+  loader: async ({ params }) => {
+    const staticPost = POSTS.find((p) => p.slug === params.slug);
+    if (staticPost) return { post: staticPost };
+    const dbPosts = await getPublicBlogPosts();
+    const row = dbPosts.find((p) => p.slug === params.slug);
+    if (!row) throw notFound();
+    const body: { heading: string; paragraphs: string[] }[] = [];
+    for (const block of row.content.split(/\n\s*\n/)) {
+      const trimmed = block.trim();
+      if (!trimmed) continue;
+      if (trimmed.startsWith("#")) {
+        body.push({ heading: trimmed.replace(/^#+\s*/, ""), paragraphs: [] });
+      } else if (body.length > 0) {
+        body[body.length - 1]!.paragraphs.push(trimmed);
+      } else {
+        body.push({ heading: "", paragraphs: [trimmed] });
+      }
+    }
+    return {
+      post: {
+        slug: row.slug,
+        title: row.title,
+        excerpt: row.excerpt,
+        date: row.published_at,
+        readTime: row.read_time,
+        body,
+      },
+    };
   },
   head: ({ params, loaderData }) => {
     if (!loaderData) {
@@ -80,8 +105,8 @@ function BlogPost() {
 
       <div className="mt-10 space-y-9">
         {post.body.map((section, i) => (
-          <Reveal key={section.heading} delay={i * 60}>
-            <h2 className="text-xl font-bold">{section.heading}</h2>
+          <Reveal key={section.heading || i} delay={i * 60}>
+            {section.heading && <h2 className="text-xl font-bold">{section.heading}</h2>}
             {section.paragraphs.map((p) => (
               <p key={p} className="mt-3 text-muted-foreground">
                 {p}
