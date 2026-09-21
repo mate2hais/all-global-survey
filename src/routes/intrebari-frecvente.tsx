@@ -10,12 +10,14 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { CONTACT, FAQ } from "@/lib/site-data";
+import { getPublicFaq } from "@/lib/public-content.functions";
 
 const TITLE = "Întrebări frecvente — certificat și audit energetic Galați";
 const DESC =
   "Ce este certificatul energetic, diferența față de audit, ce înseamnă Gradul I, standardul NZEB, costuri, durate și valabilitatea de 10 ani.";
 
 export const Route = createFileRoute("/intrebari-frecvente")({
+  loader: () => getPublicFaq(),
   head: () => ({
     meta: [
       { title: TITLE },
@@ -31,6 +33,10 @@ export const Route = createFileRoute("/intrebari-frecvente")({
 });
 
 function FaqPage() {
+  const rows = Route.useLoaderData();
+  const items = rows.length > 0
+    ? rows.map((r) => ({ q: r.question, a: r.answer }))
+    : FAQ;
   return (
     <>
       <PageHero
@@ -41,7 +47,7 @@ function FaqPage() {
       <div className="mx-auto max-w-3xl px-6 py-16">
         <Reveal>
           <Accordion type="single" collapsible className="w-full">
-            {FAQ.map((item, i) => (
+            {items.map((item, i) => (
               <AccordionItem key={item.q} value={`item-${i}`}>
                 <AccordionTrigger className="text-left text-base font-semibold">
                   {item.q}

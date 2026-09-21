@@ -39,6 +39,16 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {
+  BlogPanel,
+  FaqPanel,
+  SiteTextPanel,
+  TestimonialsPanel,
+  type BlogRow,
+  type ContentRow,
+  type FaqRow,
+  type TestimonialRow,
+} from "@/components/admin/ContentPanels";
+import {
   REQUEST_STATUSES,
   normalizeStatus,
   statusLabel,
@@ -107,17 +117,25 @@ function AdminPage() {
   const [news, setNews] = useState<NewsRow[]>([]);
   const [gallery, setGallery] = useState<GalleryRow[]>([]);
   const [stats, setStats] = useState<StatRow[]>([]);
+  const [testimonials, setTestimonials] = useState<TestimonialRow[]>([]);
+  const [faq, setFaq] = useState<FaqRow[]>([]);
+  const [posts, setPosts] = useState<BlogRow[]>([]);
+  const [content, setContent] = useState<ContentRow[]>([]);
   const [loading, setLoading] = useState(true);
 
   const load = useCallback(async () => {
     setLoading(true);
-    const [r, f, p, n, g, s] = await Promise.all([
+    const [r, f, p, n, g, s, t, q, b, c] = await Promise.all([
       supabase.from("audit_requests").select("*").order("created_at", { ascending: false }),
       supabase.from("request_files").select("id, request_id, path, file_name"),
       supabase.from("prices").select("*").order("sort_order"),
       supabase.from("news").select("*").order("published_at", { ascending: false }),
       supabase.from("gallery_images").select("*").order("sort_order"),
       supabase.from("site_stats").select("*").order("key"),
+      supabase.from("testimonials").select("*").order("sort_order"),
+      supabase.from("faq_items").select("*").order("sort_order"),
+      supabase.from("blog_posts").select("*").order("published_at", { ascending: false }),
+      supabase.from("site_content").select("key, label, value").order("key"),
     ]);
     setRequests((r.data as RequestRow[]) ?? []);
     setFiles((f.data as FileRow[]) ?? []);
@@ -125,6 +143,10 @@ function AdminPage() {
     setNews((n.data as NewsRow[]) ?? []);
     setGallery((g.data as GalleryRow[]) ?? []);
     setStats((s.data as StatRow[]) ?? []);
+    setTestimonials((t.data as TestimonialRow[]) ?? []);
+    setFaq((q.data as FaqRow[]) ?? []);
+    setPosts((b.data as BlogRow[]) ?? []);
+    setContent((c.data as ContentRow[]) ?? []);
     setLoading(false);
   }, []);
 
@@ -220,6 +242,10 @@ function AdminPage() {
           <TabsTrigger value="requests">Solicitări</TabsTrigger>
           <TabsTrigger value="prices">Prețuri</TabsTrigger>
           <TabsTrigger value="news">Noutăți & reglementări</TabsTrigger>
+          <TabsTrigger value="blog">Blog</TabsTrigger>
+          <TabsTrigger value="testimonials">Testimoniale</TabsTrigger>
+          <TabsTrigger value="faq">Întrebări frecvente</TabsTrigger>
+          <TabsTrigger value="texts">Texte site</TabsTrigger>
           <TabsTrigger value="gallery">Imagini</TabsTrigger>
           <TabsTrigger value="stats">Indicatori</TabsTrigger>
         </TabsList>
@@ -303,6 +329,26 @@ function AdminPage() {
 
         <TabsContent value="news" className="mt-6">
           <NewsPanel rows={news} onChanged={load} />
+        </TabsContent>
+
+        <TabsContent value="blog" className="mt-6">
+          <BlogPanel
+            rows={posts}
+            onChanged={load}
+            imageOptions={gallery.map((g) => ({ url: g.image_url, title: g.title ?? "Imagine" }))}
+          />
+        </TabsContent>
+
+        <TabsContent value="testimonials" className="mt-6">
+          <TestimonialsPanel rows={testimonials} onChanged={load} />
+        </TabsContent>
+
+        <TabsContent value="faq" className="mt-6">
+          <FaqPanel rows={faq} onChanged={load} />
+        </TabsContent>
+
+        <TabsContent value="texts" className="mt-6">
+          <SiteTextPanel rows={content} onChanged={load} />
         </TabsContent>
 
         <TabsContent value="gallery" className="mt-6">

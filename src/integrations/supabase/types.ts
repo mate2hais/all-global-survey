@@ -65,6 +65,69 @@ export type Database = {
         }
         Relationships: []
       }
+      blog_posts: {
+        Row: {
+          content: string
+          excerpt: string
+          id: string
+          image_url: string | null
+          published: boolean
+          published_at: string
+          read_time: string
+          slug: string
+          title: string
+        }
+        Insert: {
+          content?: string
+          excerpt?: string
+          id?: string
+          image_url?: string | null
+          published?: boolean
+          published_at?: string
+          read_time?: string
+          slug: string
+          title: string
+        }
+        Update: {
+          content?: string
+          excerpt?: string
+          id?: string
+          image_url?: string | null
+          published?: boolean
+          published_at?: string
+          read_time?: string
+          slug?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      faq_items: {
+        Row: {
+          answer: string
+          created_at: string
+          id: string
+          published: boolean
+          question: string
+          sort_order: number
+        }
+        Insert: {
+          answer: string
+          created_at?: string
+          id?: string
+          published?: boolean
+          question: string
+          sort_order?: number
+        }
+        Update: {
+          answer?: string
+          created_at?: string
+          id?: string
+          published?: boolean
+          question?: string
+          sort_order?: number
+        }
+        Relationships: []
+      }
       gallery_images: {
         Row: {
           created_at: string
@@ -199,6 +262,27 @@ export type Database = {
           },
         ]
       }
+      site_content: {
+        Row: {
+          key: string
+          label: string
+          updated_at: string
+          value: string
+        }
+        Insert: {
+          key: string
+          label: string
+          updated_at?: string
+          value?: string
+        }
+        Update: {
+          key?: string
+          label?: string
+          updated_at?: string
+          value?: string
+        }
+        Relationships: []
+      }
       site_stats: {
         Row: {
           key: string
@@ -214,6 +298,39 @@ export type Database = {
           key?: string
           label?: string
           value?: number
+        }
+        Relationships: []
+      }
+      testimonials: {
+        Row: {
+          city: string
+          created_at: string
+          id: string
+          name: string
+          published: boolean
+          rating: number
+          sort_order: number
+          text: string
+        }
+        Insert: {
+          city?: string
+          created_at?: string
+          id?: string
+          name: string
+          published?: boolean
+          rating?: number
+          sort_order?: number
+          text: string
+        }
+        Update: {
+          city?: string
+          created_at?: string
+          id?: string
+          name?: string
+          published?: boolean
+          rating?: number
+          sort_order?: number
+          text?: string
         }
         Relationships: []
       }

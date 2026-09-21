@@ -3,12 +3,14 @@ import { ArrowRight, CalendarDays, Clock } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
 import { POSTS } from "@/lib/site-data";
+import { getPublicBlogPosts } from "@/lib/public-content.functions";
 
 const TITLE = "Blog — certificat energetic, NZEB și audit industrial în Galați";
 const DESC =
   "Articole practice despre certificate energetice, clădiri NZEB, audit energetic industrial și surse regenerabile, explicate pentru proprietari și firme din Galați.";
 
 export const Route = createFileRoute("/blog/")({
+  loader: () => getPublicBlogPosts(),
   head: () => ({
     meta: [
       { title: TITLE },
@@ -24,6 +26,17 @@ export const Route = createFileRoute("/blog/")({
 });
 
 function BlogIndex() {
+  const dbPosts = Route.useLoaderData();
+  const posts = [
+    ...dbPosts.map((p) => ({
+      slug: p.slug,
+      title: p.title,
+      excerpt: p.excerpt,
+      date: p.published_at,
+      readTime: p.read_time,
+    })),
+    ...POSTS,
+  ].sort((a, b) => (a.date < b.date ? 1 : -1));
   return (
     <>
       <PageHero
@@ -32,7 +45,7 @@ function BlogIndex() {
         description="Răspunsuri clare la întrebările pe care le primesc cel mai des de la proprietari, asociații și firme din Galați."
       />
       <div className="mx-auto grid max-w-6xl gap-6 px-6 py-16 md:grid-cols-2">
-        {POSTS.map((p, i) => (
+        {posts.map((p, i) => (
           <Reveal key={p.slug} delay={i * 70}>
             <Link
               to="/blog/$slug"

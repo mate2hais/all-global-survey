@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
 import { CONTACT, TESTIMONIALS, CASE_STUDIES } from "@/lib/site-data";
+import { getPublicTestimonials } from "@/lib/public-content.functions";
 import halaImg from "@/assets/hala-industriala.jpg";
 import nzebImg from "@/assets/nzeb.jpg";
 
@@ -12,6 +13,7 @@ const DESC =
   "Recenzii de la proprietari, asociații și firme din Galați, plus studii de caz pentru un audit industrial și o clădire NZEB.";
 
 export const Route = createFileRoute("/testimoniale")({
+  loader: () => getPublicTestimonials(),
   head: () => ({
     meta: [
       { title: TITLE },
@@ -29,6 +31,8 @@ export const Route = createFileRoute("/testimoniale")({
 const IMAGES = [halaImg, nzebImg];
 
 function TestimonialePage() {
+  const rows = Route.useLoaderData();
+  const testimonials = rows.length > 0 ? rows : TESTIMONIALS;
   return (
     <>
       <PageHero
@@ -39,7 +43,7 @@ function TestimonialePage() {
 
       <div className="mx-auto max-w-7xl px-6 py-16">
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {TESTIMONIALS.map((t, i) => (
+          {testimonials.map((t, i) => (
             <Reveal key={t.name} delay={i * 60}>
               <div className="surface-card h-full p-6">
                 <div className="flex gap-0.5 text-primary">

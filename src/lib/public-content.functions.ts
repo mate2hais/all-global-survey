@@ -36,3 +36,37 @@ export const getPublicNews = createServerFn({ method: "GET" }).handler(async () 
     .order("published_at", { ascending: false });
   return data ?? [];
 });
+
+export const getPublicTestimonials = createServerFn({ method: "GET" }).handler(async () => {
+  const { data } = await publicClient()
+    .from("testimonials")
+    .select("id, name, city, rating, text")
+    .eq("published", true)
+    .order("sort_order", { ascending: true });
+  return data ?? [];
+});
+
+export const getPublicFaq = createServerFn({ method: "GET" }).handler(async () => {
+  const { data } = await publicClient()
+    .from("faq_items")
+    .select("id, question, answer")
+    .eq("published", true)
+    .order("sort_order", { ascending: true });
+  return data ?? [];
+});
+
+export const getPublicBlogPosts = createServerFn({ method: "GET" }).handler(async () => {
+  const { data } = await publicClient()
+    .from("blog_posts")
+    .select("id, slug, title, excerpt, content, image_url, read_time, published_at")
+    .eq("published", true)
+    .order("published_at", { ascending: false });
+  return data ?? [];
+});
+
+export const getSiteContent = createServerFn({ method: "GET" }).handler(async () => {
+  const { data } = await publicClient().from("site_content").select("key, value");
+  const map: Record<string, string> = {};
+  for (const row of data ?? []) map[row.key] = row.value;
+  return map;
+});
