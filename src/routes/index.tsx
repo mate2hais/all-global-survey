@@ -16,7 +16,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/site/Reveal";
 import { CONTACT, SERVICES, AREAS, TESTIMONIALS } from "@/lib/site-data";
-import { getSiteContent } from "@/lib/public-content.functions";
+import { getSiteContent, getPublicGallery } from "@/lib/public-content.functions";
 import heroImg from "@/assets/hero-cladiri.jpg";
 import termografieImg from "@/assets/termografie.jpg";
 import {
@@ -33,7 +33,10 @@ const DESC =
   "Auditor energetic atestat Gradul I în Galați: certificate de performanță energetică, audituri pentru clădiri și industrie, consultanță NZEB și SER. Sună la 0773.932.496.";
 
 export const Route = createFileRoute("/")({
-  loader: () => getSiteContent(),
+  loader: async () => {
+    const [content, gallery] = await Promise.all([getSiteContent(), getPublicGallery()]);
+    return { content, gallery };
+  },
   head: () => ({
     meta: [
       { title: TITLE },
@@ -51,7 +54,7 @@ export const Route = createFileRoute("/")({
 const ICONS = [Home, Building2, Factory, Sun, Sun, Building2];
 
 function Index() {
-  const content = Route.useLoaderData();
+  const { content, gallery } = Route.useLoaderData();
   const anunt = content["anunt_bara"]?.trim();
   return (
     <>
@@ -268,6 +271,33 @@ function Index() {
           </Reveal>
         </div>
       </section>
+
+      {gallery.length > 0 && (
+        <section className="bg-muted/40 py-20">
+          <div className="mx-auto max-w-7xl px-6">
+            <Reveal>
+              <h2 className="text-2xl font-bold md:text-4xl">Galerie lucrări</h2>
+              <p className="mt-3 max-w-2xl text-muted-foreground">
+                Imagini din activitatea de certificare și audit energetic.
+              </p>
+            </Reveal>
+            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {gallery.map((img, i) => (
+                <Reveal key={img.id} delay={i * 60}>
+                  <div className="surface-card overflow-hidden p-0">
+                    <img
+                      src={img.url}
+                      alt={img.title}
+                      loading="lazy"
+                      className="h-56 w-full object-cover"
+                    />
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       <section className="pb-24">
         <div className="mx-auto max-w-7xl px-6">
