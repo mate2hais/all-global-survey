@@ -54,7 +54,7 @@ export const Route = createFileRoute("/")({
 const ICONS = [Home, Building2, Factory, Sun, Sun, Building2];
 
 function Index() {
-  const content = Route.useLoaderData();
+  const { content, gallery } = Route.useLoaderData();
   const anunt = content["anunt_bara"]?.trim();
   return (
     <>
