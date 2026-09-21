@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import {
   BarChart3,
   FileText,
@@ -38,6 +38,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  REQUEST_STATUSES,
+  normalizeStatus,
+  statusLabel,
+  statusTone,
+} from "@/lib/request-status";
 
 export const Route = createFileRoute("/_authenticated/administrare")({
   head: () => ({
@@ -90,7 +96,7 @@ type GalleryRow = {
 };
 type StatRow = { key: string; value: number; label: string };
 
-const STATUSES = ["nou", "contactat", "programat", "finalizat", "anulat"];
+const STATUSES = REQUEST_STATUSES;
 
 function AdminPage() {
   const navigate = useNavigate();
