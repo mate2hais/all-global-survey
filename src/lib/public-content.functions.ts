@@ -64,6 +64,28 @@ export const getPublicBlogPosts = createServerFn({ method: "GET" }).handler(asyn
   return data ?? [];
 });
 
+export const getPublicGallery = createServerFn({ method: "GET" }).handler(async () => {
+  const { data } = await publicClient()
+    .from("gallery_images")
+    .select("id, title, image_url, storage_path, sort_order")
+    .order("sort_order", { ascending: true });
+  const rows = data ?? [];
+  if (rows.length === 0) return [];
+  const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+  const out: { id: string; title: string; url: string }[] = [];
+  for (const row of rows) {
+    let url = row.image_url;
+    if (row.storage_path) {
+      const signed = await supabaseAdmin.storage
+        .from("media")
+        .createSignedUrl(row.storage_path, 60 * 60 * 24);
+      if (signed.data?.signedUrl) url = signed.data.signedUrl;
+    }
+    out.push({ id: row.id, title: row.title ?? "Imagine", url });
+  }
+  return out;
+});
+
 export const getSiteContent = createServerFn({ method: "GET" }).handler(async () => {
   const { data } = await publicClient().from("site_content").select("key, value");
   const map: Record<string, string> = {};
