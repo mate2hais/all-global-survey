@@ -188,6 +188,11 @@ function AdminPage() {
           <Button variant="soft" onClick={() => void load()} disabled={loading}>
             <RefreshCw className={loading ? "animate-spin" : ""} /> Reîmprospătează
           </Button>
+          <Button variant="soft" asChild>
+            <Link to="/solicitari">
+              <Inbox /> Solicitări
+            </Link>
+          </Button>
           <Button variant="outline" onClick={signOut}>
             <LogOut /> Deconectare
           </Button>
@@ -380,19 +385,24 @@ function RequestCard({
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <Badge variant="secondary">{status}</Badge>
-          <Select value={status} onValueChange={updateStatus}>
+          <Badge variant={statusTone(status)}>{statusLabel(status)}</Badge>
+          <Select value={normalizeStatus(status)} onValueChange={updateStatus}>
             <SelectTrigger className="w-40">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
               {STATUSES.map((s) => (
-                <SelectItem key={s} value={s}>
-                  {s}
+                <SelectItem key={s.value} value={s.value}>
+                  {s.label}
                 </SelectItem>
               ))}
             </SelectContent>
           </Select>
+          <Button variant="soft" size="sm" asChild>
+            <Link to="/solicitari/$id" params={{ id: request.id }}>
+              Deschide
+            </Link>
+          </Button>
           <Button variant="outline" size="icon" onClick={() => void remove()} aria-label="Șterge">
             <Trash2 className="size-4" />
           </Button>
