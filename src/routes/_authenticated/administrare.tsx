@@ -718,6 +718,18 @@ function GalleryPanel({ rows, onChanged }: { rows: GalleryRow[]; onChanged: () =
     else await onChanged();
   }
 
+  async function togglePublished(row: GalleryRow) {
+    const { error } = await supabase
+      .from("gallery_images")
+      .update({ published: !row.published })
+      .eq("id", row.id);
+    if (error) toast.error("Actualizare eșuată.");
+    else {
+      toast.success(row.published ? "Imagine ascunsă pe site." : "Imagine publicată pe site.");
+      await onChanged();
+    }
+  }
+
   return (
     <div className="space-y-6">
       <div className="surface-card p-6">
@@ -735,6 +747,7 @@ function GalleryPanel({ rows, onChanged }: { rows: GalleryRow[]; onChanged: () =
         />
         <p className="mt-2 text-xs text-muted-foreground">
           <Upload className="mr-1 inline size-3" /> Imagini JPG sau PNG, maximum 10 MB fiecare.
+          Imaginile publicate apar pe prima pagină și pe pagina Galerie lucrări.
         </p>
       </div>
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -746,11 +759,25 @@ function GalleryPanel({ rows, onChanged }: { rows: GalleryRow[]; onChanged: () =
               className="h-44 w-full object-cover"
               loading="lazy"
             />
-            <div className="flex items-center justify-between gap-3 p-4">
-              <p className="truncate text-sm">{row.title}</p>
-              <Button variant="outline" size="icon" onClick={() => void remove(row)}>
-                <Trash2 className="size-4" />
-              </Button>
+            <div className="space-y-3 p-4">
+              <div className="flex items-center justify-between gap-3">
+                <p className="truncate text-sm">{row.title}</p>
+                <Button variant="outline" size="icon" onClick={() => void remove(row)}>
+                  <Trash2 className="size-4" />
+                </Button>
+              </div>
+              <div className="flex items-center justify-between gap-3">
+                <span className="text-xs text-muted-foreground">
+                  {row.published ? "Publicată pe site" : "Ascunsă"}
+                </span>
+                <Button
+                  variant={row.published ? "outline" : "cta"}
+                  size="sm"
+                  onClick={() => void togglePublished(row)}
+                >
+                  {row.published ? "Ascunde" : "Publică"}
+                </Button>
+              </div>
             </div>
           </div>
         ))}
