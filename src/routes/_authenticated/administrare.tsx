@@ -103,6 +103,7 @@ type GalleryRow = {
   image_url: string;
   storage_path: string | null;
   sort_order: number;
+  published: boolean;
 };
 type StatRow = { key: string; value: number; label: string };
 

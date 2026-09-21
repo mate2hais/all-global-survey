@@ -67,7 +67,8 @@ export const getPublicBlogPosts = createServerFn({ method: "GET" }).handler(asyn
 export const getPublicGallery = createServerFn({ method: "GET" }).handler(async () => {
   const { data } = await publicClient()
     .from("gallery_images")
-    .select("id, title, image_url, storage_path, sort_order")
+    .select("id, title, image_url, storage_path, sort_order, published")
+    .eq("published", true)
     .order("sort_order", { ascending: true });
   const rows = data ?? [];
   if (rows.length === 0) return [];
