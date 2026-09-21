@@ -26,6 +26,8 @@ import { Route as ZonaDeAcoperireRouteImport } from './routes/zona-de-acoperire'
 import { Route as AuthenticatedAdministrareRouteImport } from './routes/_authenticated/administrare'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as AuthenticatedSolicitariIndexRouteImport } from './routes/_authenticated/solicitari.index'
+import { Route as AuthenticatedSolicitariIdRouteImport } from './routes/_authenticated/solicitari.$id'
 import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
 import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
@@ -115,6 +117,18 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   path: '/blog/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedSolicitariIndexRoute =
+  AuthenticatedSolicitariIndexRouteImport.update({
+    id: '/solicitari/',
+    path: '/solicitari/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedSolicitariIdRoute =
+  AuthenticatedSolicitariIdRouteImport.update({
+    id: '/solicitari/$id',
+    path: '/solicitari/$id',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const LovableEmailAuthPreviewRoute = LovableEmailAuthPreviewRouteImport.update({
   id: '/lovable/email/auth/preview',
   path: '/lovable/email/auth/preview',
@@ -149,6 +163,8 @@ export interface FileRoutesByFullPath {
   '/administrare': typeof AuthenticatedAdministrareRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/': typeof BlogIndexRoute
+  '/solicitari/$id': typeof AuthenticatedSolicitariIdRoute
+  '/solicitari/': typeof AuthenticatedSolicitariIndexRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
@@ -170,6 +186,8 @@ export interface FileRoutesByTo {
   '/administrare': typeof AuthenticatedAdministrareRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog': typeof BlogIndexRoute
+  '/solicitari/$id': typeof AuthenticatedSolicitariIdRoute
+  '/solicitari': typeof AuthenticatedSolicitariIndexRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
@@ -193,6 +211,8 @@ export interface FileRoutesById {
   '/_authenticated/administrare': typeof AuthenticatedAdministrareRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/': typeof BlogIndexRoute
+  '/_authenticated/solicitari/$id': typeof AuthenticatedSolicitariIdRoute
+  '/_authenticated/solicitari/': typeof AuthenticatedSolicitariIndexRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
@@ -216,6 +236,8 @@ export interface FileRouteTypes {
     | '/administrare'
     | '/blog/$slug'
     | '/blog/'
+    | '/solicitari/$id'
+    | '/solicitari/'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/transactional/preview'
@@ -237,6 +259,8 @@ export interface FileRouteTypes {
     | '/administrare'
     | '/blog/$slug'
     | '/blog'
+    | '/solicitari/$id'
+    | '/solicitari'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/transactional/preview'
@@ -259,6 +283,8 @@ export interface FileRouteTypes {
     | '/_authenticated/administrare'
     | '/blog/$slug'
     | '/blog/'
+    | '/_authenticated/solicitari/$id'
+    | '/_authenticated/solicitari/'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/transactional/preview'
@@ -407,6 +433,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/solicitari/': {
+      id: '/_authenticated/solicitari/'
+      path: '/solicitari'
+      fullPath: '/solicitari/'
+      preLoaderRoute: typeof AuthenticatedSolicitariIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/solicitari/$id': {
+      id: '/_authenticated/solicitari/$id'
+      path: '/solicitari/$id'
+      fullPath: '/solicitari/$id'
+      preLoaderRoute: typeof AuthenticatedSolicitariIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/lovable/email/auth/preview': {
       id: '/lovable/email/auth/preview'
       path: '/lovable/email/auth/preview'
@@ -433,10 +473,14 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdministrareRoute: typeof AuthenticatedAdministrareRoute
+  AuthenticatedSolicitariIdRoute: typeof AuthenticatedSolicitariIdRoute
+  AuthenticatedSolicitariIndexRoute: typeof AuthenticatedSolicitariIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdministrareRoute: AuthenticatedAdministrareRoute,
+  AuthenticatedSolicitariIdRoute: AuthenticatedSolicitariIdRoute,
+  AuthenticatedSolicitariIndexRoute: AuthenticatedSolicitariIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
