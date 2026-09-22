@@ -45,6 +45,7 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: DESC },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "/" }],
   }),
@@ -314,8 +315,8 @@ function Index() {
                 Aveți nevoie de un certificat sau de un audit energetic?
               </h2>
               <p className="mx-auto mt-4 max-w-2xl opacity-90">
-                Spuneți-mi tipul clădirii și suprafața, iar în aceeași zi primiți o estimare clară de
-                preț și de termen.
+                {content["home_cta_text"]?.trim() ||
+                  "Spuneți-mi tipul clădirii și suprafața, iar în aceeași zi primiți o estimare clară de preț și de termen."}
               </p>
               <div className="mt-8 flex flex-wrap justify-center gap-3">
                 <Button asChild variant="onHero" size="xl">

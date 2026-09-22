@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
 import { CONTACT } from "@/lib/site-data";
+import { getSiteContent } from "@/lib/public-content.functions";
 import portretAsset from "@/assets/portret-auditor.jpg.asset.json";
 const portret = portretAsset.url;
 
@@ -28,6 +29,7 @@ const DESC =
   "Auditor energetic pentru clădiri, Grad I, atestat CAA nr. 02471. Peste 4 ani de experiență în audituri energetice, studii SER / nZEB pentru clădiri publice, rezidențiale, administrative, medicale și educaționale.";
 
 export const Route = createFileRoute("/despre")({
+  loader: () => getSiteContent(),
   head: () => ({
     meta: [
       { title: TITLE },
@@ -36,6 +38,7 @@ export const Route = createFileRoute("/despre")({
       { property: "og:description", content: DESC },
       { property: "og:type", content: "profile" },
       { property: "og:url", content: "/despre" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "/despre" }],
   }),
@@ -137,6 +140,7 @@ const capabilities = [
 ];
 
 function DesprePage() {
+  const content = Route.useLoaderData();
   return (
     <>
       <PageHero
@@ -177,10 +181,8 @@ function DesprePage() {
           <Reveal>
             <h2 className="text-2xl font-bold">Cine sunt și ce fac</h2>
             <p className="mt-3 text-muted-foreground">
-              Lucrez ca auditor energetic în Galați și mă ocup de tot ce înseamnă evaluarea
-              consumului de energie al unei clădiri: de la certificatul cerut de notar la vânzarea
-              unui apartament, până la auditul complet al unei hale de producție sau la documentația
-              NZEB pentru o construcție nouă.
+              {content["despre_intro"]?.trim() ||
+                "Lucrez ca auditor energetic în Galați și mă ocup de tot ce înseamnă evaluarea consumului de energie al unei clădiri: de la certificatul cerut de notar la vânzarea unui apartament, până la auditul complet al unei hale de producție sau la documentația NZEB pentru o construcție nouă."}
             </p>
             <p className="mt-3 text-muted-foreground">
               Fiecare lucrare este realizată personal, de la măsurători până la semnătura de pe
