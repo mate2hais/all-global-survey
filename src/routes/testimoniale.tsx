@@ -3,6 +3,7 @@ import { Star, Phone, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
+import { TestimonialForm } from "@/components/site/TestimonialForm";
 import { CONTACT, TESTIMONIALS, CASE_STUDIES } from "@/lib/site-data";
 import { getPublicTestimonials } from "@/lib/public-content.functions";
 import halaImg from "@/assets/hala-industriala.jpg";
