@@ -93,3 +93,24 @@ export const getSiteContent = createServerFn({ method: "GET" }).handler(async ()
   for (const row of data ?? []) map[row.key] = row.value;
   return map;
 });
+
+export const submitTestimonial = createServerFn({ method: "POST" })
+  .inputValidator((data: unknown) => {
+    const d = data as Record<string, unknown>;
+    const name = String(d?.["name"] ?? "").trim();
+    const city = String(d?.["city"] ?? "").trim();
+    const text = String(d?.["text"] ?? "").trim();
+    const rating = Number(d?.["rating"] ?? 0);
+    if (name.length < 2 || name.length > 80) throw new Error("Nume invalid.");
+    if (city.length > 80) throw new Error("Localitate invalidă.");
+    if (text.length < 10 || text.length > 1500) throw new Error("Mesaj invalid.");
+    if (!Number.isInteger(rating) || rating < 1 || rating > 5) throw new Error("Rating invalid.");
+    return { name, city, text, rating };
+  })
+  .handler(async ({ data }) => {
+    const { error } = await publicClient()
+      .from("testimonials")
+      .insert({ ...data, published: false, sort_order: 999 });
+    if (error) throw new Error("Nu am putut salva recenzia.");
+    return { ok: true };
+  });
