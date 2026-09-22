@@ -118,10 +118,12 @@ function Index() {
           </dl>
           <p className="mt-6 max-w-3xl rounded-xl border border-primary-foreground/20 bg-primary-foreground/10 p-5 text-sm leading-relaxed opacity-90 backdrop-blur-sm">
             Conform memoriului de activitate și registrului de evidență, au fost realizate în total{" "}
-            <strong className="font-semibold">146 de lucrări</strong>, dintre care{" "}
-            <strong className="font-semibold">132 certificate de performanță energetică</strong>,{" "}
-            <strong className="font-semibold">6 audituri energetice pentru clădiri</strong> și{" "}
-            <strong className="font-semibold">13 studii nZEB / SER</strong>.
+            <strong className="font-semibold">{lucrari} de lucrări</strong>, dintre care{" "}
+            <strong className="font-semibold">
+              {certificate} certificate de performanță energetică
+            </strong>
+            , <strong className="font-semibold">{audituriCladiri} audituri energetice pentru clădiri</strong>{" "}
+            și <strong className="font-semibold">{studii} studii nZEB / SER</strong>.
           </p>
         </div>
       </section>
