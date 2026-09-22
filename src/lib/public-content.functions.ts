@@ -114,3 +114,10 @@ export const submitTestimonial = createServerFn({ method: "POST" })
     if (error) throw new Error("Nu am putut salva recenzia.");
     return { ok: true };
   });
+
+export const getSiteStats = createServerFn({ method: "GET" }).handler(async () => {
+  const { data } = await publicClient().from("site_stats").select("key, value");
+  const map: Record<string, number> = {};
+  for (const row of data ?? []) map[row.key] = row.value;
+  return map;
+});
