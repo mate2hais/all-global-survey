@@ -16,7 +16,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/site/Reveal";
 import { CONTACT, SERVICES, AREAS, TESTIMONIALS } from "@/lib/site-data";
-import { getSiteContent, getPublicGallery } from "@/lib/public-content.functions";
+import { getSiteContent, getPublicGallery, getSiteStats } from "@/lib/public-content.functions";
 import heroImg from "@/assets/hero-cladiri.jpg";
 import termografieImg from "@/assets/termografie.jpg";
 import {
@@ -34,8 +34,12 @@ const DESC =
 
 export const Route = createFileRoute("/")({
   loader: async () => {
-    const [content, gallery] = await Promise.all([getSiteContent(), getPublicGallery()]);
-    return { content, gallery };
+    const [content, gallery, stats] = await Promise.all([
+      getSiteContent(),
+      getPublicGallery(),
+      getSiteStats(),
+    ]);
+    return { content, gallery, stats };
   },
   head: () => ({
     meta: [
@@ -55,8 +59,12 @@ export const Route = createFileRoute("/")({
 const ICONS = [Home, Building2, Factory, Sun, Sun, Building2];
 
 function Index() {
-  const { content, gallery } = Route.useLoaderData();
+  const { content, gallery, stats } = Route.useLoaderData();
   const anunt = content["anunt_bara"]?.trim();
+  const lucrari = stats["audituri_realizate"] ?? 146;
+  const certificate = stats["certificate_emise"] ?? 132;
+  const audituriCladiri = stats["audituri_cladiri"] ?? 6;
+  const studii = stats["studii_nzeb_ser"] ?? 13;
   return (
     <>
       {anunt && (
@@ -110,10 +118,12 @@ function Index() {
           </dl>
           <p className="mt-6 max-w-3xl rounded-xl border border-primary-foreground/20 bg-primary-foreground/10 p-5 text-sm leading-relaxed opacity-90 backdrop-blur-sm">
             Conform memoriului de activitate și registrului de evidență, au fost realizate în total{" "}
-            <strong className="font-semibold">146 de lucrări</strong>, dintre care{" "}
-            <strong className="font-semibold">132 certificate de performanță energetică</strong>,{" "}
-            <strong className="font-semibold">6 audituri energetice pentru clădiri</strong> și{" "}
-            <strong className="font-semibold">13 studii nZEB / SER</strong>.
+            <strong className="font-semibold">{lucrari} de lucrări</strong>, dintre care{" "}
+            <strong className="font-semibold">
+              {certificate} certificate de performanță energetică
+            </strong>
+            , <strong className="font-semibold">{audituriCladiri} audituri energetice pentru clădiri</strong>{" "}
+            și <strong className="font-semibold">{studii} studii nZEB / SER</strong>.
           </p>
         </div>
       </section>
