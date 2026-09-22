@@ -35,11 +35,12 @@ const DESC =
 export const Route = createFileRoute("/")({
   loader: async () => {
     const [content, gallery, stats] = await Promise.all([
-      getSiteContent(),
-      getPublicGallery(),
-      getSiteStats(),
+      getSiteContent().catch(() => ({})),
+      getPublicGallery().catch(() => []),
+      getSiteStats().catch(() => ({})),
     ]);
-    return { content, gallery, stats };
+    return { content: content ?? {}, gallery: gallery ?? [], stats: stats ?? {} };
+
   },
   head: () => ({
     meta: [
@@ -59,12 +60,17 @@ export const Route = createFileRoute("/")({
 const ICONS = [Home, Building2, Factory, Sun, Sun, Building2];
 
 function Index() {
-  const { content, gallery, stats } = Route.useLoaderData();
+  const data = Route.useLoaderData();
+  const content: Record<string, string> = data?.content ?? {};
+  const gallery = data?.gallery ?? [];
+  const stats: Record<string, number> = data?.stats ?? {};
+
   const anunt = content["anunt_bara"]?.trim();
   const lucrari = stats["audituri_realizate"] ?? 146;
   const certificate = stats["certificate_emise"] ?? 132;
   const audituriCladiri = stats["audituri_cladiri"] ?? 6;
   const studii = stats["studii_nzeb_ser"] ?? 13;
+
   return (
     <>
       {anunt && (
