@@ -35,11 +35,12 @@ const DESC =
 export const Route = createFileRoute("/")({
   loader: async () => {
     const [content, gallery, stats] = await Promise.all([
-      getSiteContent(),
-      getPublicGallery(),
-      getSiteStats(),
+      getSiteContent().catch(() => ({})),
+      getPublicGallery().catch(() => []),
+      getSiteStats().catch(() => ({})),
     ]);
-    return { content, gallery, stats };
+    return { content: content ?? {}, gallery: gallery ?? [], stats: stats ?? {} };
+
   },
   head: () => ({
     meta: [
