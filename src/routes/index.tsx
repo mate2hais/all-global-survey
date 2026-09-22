@@ -61,9 +61,10 @@ const ICONS = [Home, Building2, Factory, Sun, Sun, Building2];
 
 function Index() {
   const data = Route.useLoaderData();
-  const content = data?.content ?? {};
+  const content: Record<string, string> = data?.content ?? {};
   const gallery = data?.gallery ?? [];
-  const stats = data?.stats ?? {};
+  const stats: Record<string, number> = data?.stats ?? {};
+
   const anunt = content["anunt_bara"]?.trim();
   const lucrari = stats["audituri_realizate"] ?? 146;
   const certificate = stats["certificate_emise"] ?? 132;
