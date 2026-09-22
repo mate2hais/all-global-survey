@@ -59,8 +59,12 @@ export const Route = createFileRoute("/")({
 const ICONS = [Home, Building2, Factory, Sun, Sun, Building2];
 
 function Index() {
-  const { content, gallery } = Route.useLoaderData();
+  const { content, gallery, stats } = Route.useLoaderData();
   const anunt = content["anunt_bara"]?.trim();
+  const lucrari = stats["audituri_realizate"] ?? 146;
+  const certificate = stats["certificate_emise"] ?? 132;
+  const audituriCladiri = stats["audituri_cladiri"] ?? 6;
+  const studii = stats["studii_nzeb_ser"] ?? 13;
   return (
     <>
       {anunt && (
