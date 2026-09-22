@@ -14,6 +14,7 @@ const NAV = [
   { to: "/galerie", label: "Galerie" },
   { to: "/testimoniale", label: "Testimoniale" },
   { to: "/blog", label: "Blog" },
+  { to: "/noutati", label: "Noutăți" },
   { to: "/intrebari-frecvente", label: "FAQ" },
   { to: "/contact", label: "Contact" },
 ] as const;

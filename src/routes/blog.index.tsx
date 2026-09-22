@@ -1,16 +1,19 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, CalendarDays, Clock } from "lucide-react";
+import { ArrowRight, CalendarDays, Clock, Newspaper } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
 import { POSTS } from "@/lib/site-data";
-import { getPublicBlogPosts } from "@/lib/public-content.functions";
+import { getPublicBlogPosts, getPublicNews } from "@/lib/public-content.functions";
 
 const TITLE = "Blog — certificat energetic, NZEB și audit industrial în Galați";
 const DESC =
   "Articole practice despre certificate energetice, clădiri NZEB, audit energetic industrial și surse regenerabile, explicate pentru proprietari și firme din Galați.";
 
 export const Route = createFileRoute("/blog/")({
-  loader: () => getPublicBlogPosts(),
+  loader: async () => ({
+    posts: await getPublicBlogPosts(),
+    news: await getPublicNews(),
+  }),
   head: () => ({
     meta: [
       { title: TITLE },
