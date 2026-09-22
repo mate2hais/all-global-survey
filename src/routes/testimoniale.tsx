@@ -3,6 +3,7 @@ import { Star, Phone, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
+import { TestimonialForm } from "@/components/site/TestimonialForm";
 import { CONTACT, TESTIMONIALS, CASE_STUDIES } from "@/lib/site-data";
 import { getPublicTestimonials } from "@/lib/public-content.functions";
 import halaImg from "@/assets/hala-industriala.jpg";
@@ -58,6 +59,17 @@ function TestimonialePage() {
             </Reveal>
           ))}
         </div>
+
+        <Reveal>
+          <h2 className="mt-20 text-2xl font-bold md:text-3xl">Lasă o recenzie</h2>
+          <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
+            Ați colaborat cu noi? Acordați un punctaj și povestiți experiența — recenzia apare pe site
+            după verificare.
+          </p>
+          <div className="mt-6 max-w-3xl">
+            <TestimonialForm />
+          </div>
+        </Reveal>
 
         <h2 className="mt-20 text-2xl font-bold md:text-3xl">Studii de caz</h2>
         <div className="mt-8 space-y-10">
