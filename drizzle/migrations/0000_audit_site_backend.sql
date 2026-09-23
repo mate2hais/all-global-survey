@@ -18,7 +18,7 @@ CREATE TABLE public.admin_emails (
 GRANT SELECT ON public.admin_emails TO authenticated;
 GRANT ALL ON public.admin_emails TO service_role;
 ALTER TABLE public.admin_emails ENABLE ROW LEVEL SECURITY;
-INSERT INTO public.admin_emails (email) VALUES ('panainte.iuliangabriel@yahoo.com');
+INSERT INTO public.admin_emails (email) VALUES ('certificatenergeticgalati@yahoo.com');
 
 CREATE OR REPLACE FUNCTION public.is_admin()
 RETURNS boolean

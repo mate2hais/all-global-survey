@@ -71,6 +71,6 @@ INSERT INTO public.site_content (key, label, value) VALUES
   ('home_cta_text', 'Acasă — text CTA final', 'Spuneți-mi ce clădire aveți și primiți un termen și un preț clar, fără costuri ascunse.'),
   ('contact_program', 'Contact — program de lucru', 'Luni – Vineri: 08:00 – 19:00 · Sâmbătă: 09:00 – 14:00'),
   ('contact_phone', 'Contact — telefon afișat', '0773.932.496'),
-  ('contact_email', 'Contact — email', 'Panainte.iuliangabriel@yahoo.com'),
+  ('contact_email', 'Contact — email', 'certificatenergeticgalati@yahoo.com'),
   ('anunt_bara', 'Anunț afișat în bara de sus (gol = ascuns)', ''),
   ('despre_intro', 'Despre — paragraf de prezentare', '');
