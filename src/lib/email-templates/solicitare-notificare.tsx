@@ -118,7 +118,7 @@ export const template = {
   subject: (d: Record<string, any>) =>
     `Solicitare nouă: ${d['tip'] ?? 'audit energetic'} — ${d['localitate'] ?? 'Galați'}`,
   displayName: 'Notificare solicitare (auditor)',
-  to: 'Panainte.iuliangabriel@yahoo.com',
+  to: 'certificatenergeticgalati@yahoo.com',
   previewData: {
     id: '00000000-0000-0000-0000-000000000000',
     nume: 'Ion Popescu',
