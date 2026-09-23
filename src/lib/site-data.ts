@@ -5,6 +5,7 @@ export const CONTACT = {
   phoneHref: "tel:+40773932496",
   whatsapp: "https://wa.me/40773932496",
   email: "certificatenergeticgalati@yahoo.com",
+  emailHref: "https://compose.mail.yahoo.com/?to=certificatenergeticgalati@yahoo.com",
   city: "Galați",
   program: "Luni – Vineri: 08:00 – 19:00 · Sâmbătă: 09:00 – 14:00",
 };
