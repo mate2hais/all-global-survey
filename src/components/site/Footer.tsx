@@ -32,7 +32,7 @@ export function Footer() {
               </a>
             </li>
             <li>
-              <a href={`mailto:${CONTACT.email}`} className="flex items-center gap-2 hover:underline">
+              <a href={CONTACT.emailHref} target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:underline">
                 <Mail className="size-4" /> {CONTACT.email}
               </a>
             </li>

@@ -294,7 +294,7 @@ function ContactPage() {
                 </li>
                 <li className="flex items-center gap-3">
                   <Mail className="size-4 text-primary" />
-                  <a href={`mailto:${CONTACT.email}`} className="hover:underline">
+                  <a href={CONTACT.emailHref} target="_blank" rel="noreferrer" className="hover:underline">
                     {CONTACT.email}
                   </a>
                 </li>
