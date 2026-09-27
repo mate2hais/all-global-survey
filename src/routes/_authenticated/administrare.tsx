@@ -523,8 +523,11 @@ function PricesPanel({ rows, onChanged }: { rows: PriceRow[]; onChanged: () => P
       delivery: "1-3 zile",
       sort_order: (draft.at(-1)?.sort_order ?? 0) + 1,
     });
-    if (error) toast.error("Adăugare eșuată.");
-    else await onChanged();
+    if (error) toast.error("Adăugare eșuată: " + error.message);
+    else {
+      toast.success("Tarif nou adăugat — completați detaliile și salvați.");
+      await onChanged();
+    }
   }
 
   async function remove(id: string) {
