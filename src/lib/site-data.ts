@@ -439,4 +439,152 @@ export const POSTS: Post[] = [
       },
     ],
   },
+  {
+    slug: "metodologia-mc-001-2022-ce-s-a-schimbat",
+    title: "Metodologia Mc 001-2022: ce s-a schimbat în calculul certificatelor energetice",
+    excerpt:
+      "Noua metodologie de calcul a performanței energetice a clădirilor a fost aprobată prin Ordinul MDLPA nr. 16/2023 și schimbă atât modul de calcul, cât și forma certificatului.",
+    date: "2026-09-20",
+    readTime: "6 min",
+    body: [
+      {
+        heading: "Ce este Mc 001-2022 și de când se aplică",
+        paragraphs: [
+          "Metodologia de calcul al performanței energetice a clădirilor, indicativ Mc 001-2022, a fost aprobată prin Ordinul ministrului dezvoltării, lucrărilor publice și administrației nr. 16 din 5 ianuarie 2023 și publicată în Monitorul Oficial nr. 46 din 17 ianuarie 2023. Ea înlocuiește treptat versiunea anterioară a metodologiei, iar prevederile intră în vigoare etapizat.",
+          "Documentul a fost elaborat de un consorțiu coordonat de Universitatea Tehnică de Construcții București și este reglementarea pe baza căreia orice auditor energetic atestat calculează performanța energetică a unei clădiri — atât pentru certificate, cât și pentru audituri.",
+        ],
+      },
+      {
+        heading: "Principalele noutăți pentru proprietari",
+        paragraphs: [
+          "Formatul și conținutul certificatului de performanță energetică au fost aliniate la noile standarde europene și la cerințele Directivei privind performanța energetică a clădirilor (EPBD), într-o formă ușor de digitalizat. Practic, certificatul comunică mai clar consumul de energie primară, aportul din surse regenerabile și emisiile de CO₂.",
+          "Metodologia precizează explicit documentele care trebuie prezentate în diferitele faze de proiectare și la recepția clădirilor: clădirile noi se încadrează obligatoriu în categoria nZEB, iar pentru clădirile existente care se renovează se cer documentațiile aferente lucrărilor de modernizare energetică.",
+        ],
+      },
+      {
+        heading: "Ce înseamnă concret pentru o lucrare din Galați",
+        paragraphs: [
+          "Pentru un apartament sau o casă, diferența practică este că datele introduse în calcul trebuie să fie mai detaliate: alcătuirea reală a anvelopei, punțile termice, randamentele instalațiilor, sistemul de ventilare. De aceea vizita la fața locului și măsurătorile reale nu sunt opționale.",
+          "Pentru clădiri publice și obiective mari, noua metodologie impune un nivel mai ridicat de rigoare în breviarele de calcul, ceea ce este un avantaj atunci când documentația ajunge într-un dosar de finanțare.",
+        ],
+      },
+      {
+        heading: "Surse oficiale",
+        paragraphs: [
+          "Ordinul MDLPA nr. 16/2023 pentru aprobarea reglementării tehnice „Metodologie de calcul al performanței energetice a clădirilor, indicativ Mc 001-2022” — Monitorul Oficial nr. 46 și 46 bis din 17 ianuarie 2023, disponibil pe Portalul Legislativ (legislatie.just.ro) și în lista reglementărilor tehnice publicată de MDLPA.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "legea-372-2005-actualizata-obligatii-proprietari",
+    title: "Legea 372/2005 actualizată: ce obligații ai ca proprietar în 2026",
+    excerpt:
+      "Certificatul energetic la vânzare și închiriere, cerințele minime pentru clădiri noi și nZEB — cadrul legal, așa cum apare în legea republicată și modificată prin Legea 238/2024.",
+    date: "2026-09-12",
+    readTime: "6 min",
+    body: [
+      {
+        heading: "Cadrul legal în vigoare",
+        paragraphs: [
+          "Legea nr. 372/2005 privind performanța energetică a clădirilor a fost republicată în Monitorul Oficial nr. 868 din 23 septembrie 2020 și a fost modificată ulterior, inclusiv prin Ordonanțele de urgență nr. 171/2022, nr. 14/2023 și nr. 19/2023 și prin Legea nr. 238/2024, publicată în Monitorul Oficial nr. 714 din 22 iulie 2024.",
+          "Legea stabilește cadrul metodologiei de calcul, cerințele minime de performanță energetică pentru clădirile noi și pentru cele existente supuse renovării, regimul certificatului de performanță energetică și inspecția periodică a instalațiilor de încălzire și climatizare.",
+        ],
+      },
+      {
+        heading: "Certificatul energetic la vânzare și închiriere",
+        paragraphs: [
+          "Certificatul de performanță energetică este documentul prin care se indică performanța energetică a unei clădiri sau a unei unități de clădire și este elaborat conform metodologiei de calcul în vigoare, de către un auditor energetic atestat. La vânzare sau închiriere, proprietarul are obligația de a-l pune la dispoziția cumpărătorului sau chiriașului.",
+          "În practică, în Galați certificatul este cerut de notar în ziua semnării contractului, iar lipsa lui blochează tranzacția. La clădirile noi, certificatul face parte din documentele necesare la recepția la terminarea lucrărilor.",
+        ],
+      },
+      {
+        heading: "Clădiri noi: standardul nZEB",
+        paragraphs: [
+          "Legea a introdus planurile naționale pentru creșterea numărului de clădiri cu consum de energie aproape egal cu zero (nZEB). Pentru clădirile noi, încadrarea nZEB nu mai este o opțiune, iar respectarea cerințelor se verifică prin documentația tehnică și prin calculul de performanță energetică.",
+          "Modificările din 2024 accentuează și componenta de decarbonare: informarea corectă a proprietarilor prin certificatul energetic este declarată acțiune de interes public, în contextul economisirii energiei și al reducerii emisiilor în clădiri.",
+        ],
+      },
+      {
+        heading: "Surse oficiale",
+        paragraphs: [
+          "Legea nr. 372/2005 privind performanța energetică a clădirilor, republicată (Monitorul Oficial nr. 868/23.09.2020), cu modificările ulterioare, inclusiv Legea nr. 238/2024 (Monitorul Oficial nr. 714/22.07.2024) — text disponibil pe Portalul Legislativ, legislatie.just.ro.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "audit-energetic-obligatoriu-legea-121-2014",
+    title: "Auditul energetic obligatoriu pentru firme: ce prevede Legea 121/2014",
+    excerpt:
+      "Legea eficienței energetice impune obligații de audit și de management energetic pentru operatorii economici cu consumuri mari. Iată cadrul și ce presupune în practică.",
+    date: "2026-09-05",
+    readTime: "7 min",
+    body: [
+      {
+        heading: "Legea eficienței energetice, pe scurt",
+        paragraphs: [
+          "Legea nr. 121/2014 privind eficiența energetică a fost publicată în Monitorul Oficial nr. 574 din 1 august 2014 și a fost modificată de mai multe ori, între altele prin Ordonanța de urgență nr. 184/2020, Ordonanța de urgență nr. 130/2022 și Ordonanța de urgență nr. 119/2023.",
+          "Legea creează cadrul politicii naționale de eficiență energetică pe tot lanțul — resurse primare, producere, distribuție, furnizare, transport și consum final — și stabilește obligații concrete pentru operatorii economici cu consumuri energetice semnificative.",
+        ],
+      },
+      {
+        heading: "Ce obligații au operatorii economici",
+        paragraphs: [
+          "În funcție de nivelul consumului anual de energie, operatorii economici au obligația de a realiza periodic audit energetic, de a implementa un sistem de management al energiei și, pentru consumatorii mari, de a numi un manager energetic atestat sau de a contracta servicii de management energetic.",
+          "Auditurile pentru industrie și procese se realizează de auditori energetici autorizați, în condițiile reglementate prin ordinele ministrului energiei — cadrul de autorizare a auditorilor pentru industrie și de atestare a managerilor energetici este publicat pe site-ul Ministerului Energiei.",
+        ],
+      },
+      {
+        heading: "Ce livrează efectiv auditul industrial",
+        paragraphs: [
+          "Un audit corect nu se oprește la facturi. Se face bilanț energetic pe contururi: proces tehnologic, aer comprimat, abur și agent termic, motoare electrice, ventilare, iluminat, frig. Se măsoară la fața locului și se compară profilul orar de consum cu programul real de producție.",
+          "Rezultatul este un plan de măsuri prioritizate, fiecare cu investiție estimată, economie anuală și perioadă de amortizare. În multe cazuri, primele măsuri — remedierea scurgerilor de aer comprimat, reglarea programelor de funcționare, înlocuirea iluminatului — se amortizează în sub 12 luni.",
+        ],
+      },
+      {
+        heading: "Surse oficiale",
+        paragraphs: [
+          "Legea nr. 121/2014 privind eficiența energetică (Monitorul Oficial nr. 574/01.08.2014), cu modificările și completările ulterioare — Portalul Legislativ, legislatie.just.ro; secțiunea Eficiență Energetică a Ministerului Energiei, energie.gov.ro, pentru regulamentele de autorizare a auditorilor energetici pentru industrie și de atestare a managerilor energetici.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "finantari-valul-renovarii-rolul-auditului-energetic",
+    title: "Finanțări pentru renovare energetică: rolul auditului în dosarul de proiect",
+    excerpt:
+      "Programul Valul Renovării din PNRR finanțează renovarea energetică a blocurilor și a clădirilor publice. Auditul energetic este documentul care decide eligibilitatea.",
+    date: "2026-08-28",
+    readTime: "6 min",
+    body: [
+      {
+        heading: "Ce finanțează Valul Renovării",
+        paragraphs: [
+          "Componenta C5 — Valul Renovării din Planul Național de Redresare și Reziliență a fost structurată pe axe distincte: o schemă de granturi pentru eficiență energetică și reziliență în clădiri rezidențiale multifamiliale și o schemă pentru clădiri publice, inclusiv operațiuni de renovare integrată, cu consolidare seismică și renovare energetică.",
+          "Ghidurile specifice au fost aprobate prin ordine ale ministrului dezvoltării, lucrărilor publice și administrației — de exemplu Ordinul nr. 443/2022 și Ordinul nr. 444/2022, publicate în Monitorul Oficial în martie 2022 — și stabilesc condițiile de accesare pentru fiecare apel de proiecte.",
+        ],
+      },
+      {
+        heading: "De ce auditul energetic decide dosarul",
+        paragraphs: [
+          "Ghidurile condiționează finanțarea de atingerea unui nivel minim de îmbunătățire a performanței energetice, exprimat ca reducere procentuală a consumului de energie primară — pragul fiind mai mic pentru renovarea moderată și considerabil mai mare pentru renovarea aprofundată. Această reducere se demonstrează prin audit energetic, nu prin estimări.",
+          "Auditul stabilește situația inițială (consumuri, pierderi, clasă energetică) și pachetul de măsuri prin care se atinge pragul cerut. Dacă auditul este făcut superficial, dosarul fie este respins, fie proiectul nu poate justifica indicatorii la finalizare.",
+        ],
+      },
+      {
+        heading: "Ordinea corectă a documentelor",
+        paragraphs: [
+          "Practic, se pornește de la expertiza tehnică și auditul energetic al clădirii existente, urmează documentația de avizare a lucrărilor de intervenție cu scenariul de renovare, apoi proiectul tehnic. La final, după execuție, se emite un nou certificat de performanță energetică ce confirmă indicatorii asumați.",
+          "Pentru asociațiile de proprietari din Galați, pasul care întârzie cel mai des dosarul este tocmai auditul: fără acces la apartamente și fără măsurători reale, nu se poate fundamenta corect reducerea de consum.",
+        ],
+      },
+      {
+        heading: "Surse oficiale",
+        paragraphs: [
+          "Ghidurile specifice PNRR, Componenta C5 — Valul Renovării, aprobate prin Ordinele MDLPA nr. 443/2022 și nr. 444/2022 (Monitorul Oficial nr. 291 și nr. 292, respectiv 291 bis și 292 bis din 25 martie 2022) și ghidurile pentru axa dedicată clădirilor publice — texte disponibile pe Portalul Legislativ, legislatie.just.ro, și pe site-ul MDLPA.",
+        ],
+      },
+    ],
+  },
 ];
