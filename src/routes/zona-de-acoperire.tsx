@@ -64,6 +64,8 @@ function ZonaPage() {
             <iframe
               title="Hartă Galați"
               src="https://www.openstreetmap.org/export/embed.html?bbox=27.85%2C45.35%2C28.20%2C45.55&layer=mapnik&marker=45.4353%2C28.0080"
+              width={1152}
+              height={380}
               className="h-[380px] w-full"
               loading="lazy"
             />

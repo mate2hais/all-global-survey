@@ -82,6 +82,7 @@ function TestimonialePage() {
                   width={1200}
                   height={800}
                   loading="lazy"
+                  decoding="async"
                   className="h-full w-full object-cover"
                 />
                 <div className="p-7">

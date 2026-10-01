@@ -157,6 +157,7 @@ function DesprePage() {
             width={1000}
             height={1200}
             loading="lazy"
+            decoding="async"
             className="w-full rounded-2xl object-cover shadow-[var(--shadow-card)]"
           />
           <div className="surface-card mt-6 p-6">

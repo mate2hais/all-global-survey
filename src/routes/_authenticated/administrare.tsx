@@ -759,8 +759,11 @@ function GalleryPanel({ rows, onChanged }: { rows: GalleryRow[]; onChanged: () =
             <img
               src={row.image_url}
               alt={row.title ?? "Imagine site"}
+              width={1200}
+              height={800}
               className="h-44 w-full object-cover"
               loading="lazy"
+              decoding="async"
             />
             <div className="space-y-3 p-4">
               <div className="flex items-center justify-between gap-3">

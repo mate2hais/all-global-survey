@@ -52,7 +52,10 @@ export const Route = createFileRoute("/")({
       { property: "og:url", content: "/" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [
+      { rel: "canonical", href: "/" },
+      { rel: "preload", as: "image", href: heroImg, fetchPriority: "high" },
+    ],
   }),
   component: Index,
 });
@@ -84,6 +87,7 @@ function Index() {
           alt="Blocuri de locuințe și clădire industrială în Galați"
           width={1600}
           height={1000}
+          fetchPriority="high"
           className="absolute inset-0 -z-10 size-full object-cover"
         />
         <div className="absolute inset-0 -z-10 bg-[image:var(--gradient-hero)]" />
@@ -305,7 +309,10 @@ function Index() {
                     <img
                       src={img.url}
                       alt={img.title}
+                      width={1200}
+                      height={800}
                       loading="lazy"
+                      decoding="async"
                       className="h-56 w-full object-cover"
                     />
                   </div>
