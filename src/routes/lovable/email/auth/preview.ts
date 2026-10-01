@@ -19,7 +19,7 @@ const EMAIL_TEMPLATES: Record<string, React.ComponentType<any>> = {
 
 // Configuration
 const SITE_NAME = "Energy Pro Galați"
-const ROOT_DOMAIN = "energyprogalati.ro"
+const ROOT_DOMAIN = "certificatenergeticgalati.ro"
 
 // Sample data for preview mode ONLY (not used in actual email sending).
 // URLs are baked in at scaffold time from the project's real data.
