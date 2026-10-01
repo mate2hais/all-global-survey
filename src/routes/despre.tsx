@@ -154,8 +154,8 @@ function DesprePage() {
           <img
             src={portret}
             alt="Iulian Gabriel Panainte, auditor energetic gradul I în Galați"
-            width={1000}
-            height={1200}
+            width={1920}
+            height={1917}
             loading="lazy"
             decoding="async"
             className="w-full rounded-2xl object-cover shadow-[var(--shadow-card)]"
