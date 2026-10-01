@@ -312,6 +312,8 @@ function ContactPage() {
               <iframe
                 title="Hartă Galați"
                 src="https://www.openstreetmap.org/export/embed.html?bbox=27.95%2C45.39%2C28.10%2C45.48&layer=mapnik&marker=45.4353%2C28.0080"
+                width={760}
+                height={288}
                 className="h-72 w-full"
                 loading="lazy"
               />

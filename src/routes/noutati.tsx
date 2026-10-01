@@ -86,8 +86,11 @@ function NoutatiPage() {
                     <img
                       src={item.image_url}
                       alt={item.title}
+                      width={1200}
+                      height={675}
                       loading="lazy"
-                      className="mt-5 w-full rounded-xl object-cover"
+                      decoding="async"
+                      className="mt-5 aspect-video w-full rounded-xl object-cover"
                     />
                   )}
                 </article>

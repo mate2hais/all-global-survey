@@ -47,8 +47,11 @@ function GaleriePage() {
                   <img
                     src={img.url}
                     alt={img.title}
+                    width={1200}
+                    height={800}
                     loading="lazy"
-                    className="h-64 w-full object-cover"
+                    decoding="async"
+                    className="aspect-3/2 w-full object-cover"
                   />
                   {img.title && (
                     <figcaption className="p-4 text-sm text-muted-foreground">
