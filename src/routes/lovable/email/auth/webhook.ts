@@ -10,9 +10,9 @@ import { ReauthenticationEmail } from '@/lib/email-templates/reauthentication'
 
 // Configuration
 const SITE_NAME = "Energy Pro Galați"
-const SENDER_DOMAIN = "notify.energyprogalati.ro"
-const ROOT_DOMAIN = "energyprogalati.ro"
-const FROM_DOMAIN = "energyprogalati.ro"
+const SENDER_DOMAIN = "notify.certificatenergeticgalati.ro"
+const ROOT_DOMAIN = "certificatenergeticgalati.ro"
+const FROM_DOMAIN = "certificatenergeticgalati.ro"
 const SITE_URL = `https://${ROOT_DOMAIN}`
 
 // The SDK handler owns verification, dispatch, and retry semantics; this file

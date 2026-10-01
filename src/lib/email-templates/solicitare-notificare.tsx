@@ -47,7 +47,7 @@ export const SolicitareNotificare = ({
       <Container style={container}>
         <Section style={header}>
           <Text style={brand}>Solicitare nouă de pe site</Text>
-          <Text style={brandSub}>energyprogalati.ro — formular de contact</Text>
+          <Text style={brandSub}>certificatenergeticgalati.ro — formular de contact</Text>
         </Section>
         <Heading style={h1}>
           {nume} — {tip}
