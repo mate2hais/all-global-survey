@@ -21,6 +21,7 @@ import { Route as NoutatiRouteImport } from './routes/noutati'
 import { Route as PreturiRouteImport } from './routes/preturi'
 import { Route as ProcesRouteImport } from './routes/proces'
 import { Route as ServiciiRouteImport } from './routes/servicii'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TermeniRouteImport } from './routes/termeni'
 import { Route as TestimonialeRouteImport } from './routes/testimoniale'
 import { Route as ZonaDeAcoperireRouteImport } from './routes/zona-de-acoperire'
@@ -90,6 +91,11 @@ const ProcesRoute = ProcesRouteImport.update({
 const ServiciiRoute = ServiciiRouteImport.update({
   id: '/servicii',
   path: '/servicii',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TermeniRoute = TermeniRouteImport.update({
@@ -164,6 +170,7 @@ export interface FileRoutesByFullPath {
   '/preturi': typeof PreturiRoute
   '/proces': typeof ProcesRoute
   '/servicii': typeof ServiciiRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/termeni': typeof TermeniRoute
   '/testimoniale': typeof TestimonialeRoute
   '/zona-de-acoperire': typeof ZonaDeAcoperireRoute
@@ -188,6 +195,7 @@ export interface FileRoutesByTo {
   '/preturi': typeof PreturiRoute
   '/proces': typeof ProcesRoute
   '/servicii': typeof ServiciiRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/termeni': typeof TermeniRoute
   '/testimoniale': typeof TestimonialeRoute
   '/zona-de-acoperire': typeof ZonaDeAcoperireRoute
@@ -214,6 +222,7 @@ export interface FileRoutesById {
   '/preturi': typeof PreturiRoute
   '/proces': typeof ProcesRoute
   '/servicii': typeof ServiciiRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/termeni': typeof TermeniRoute
   '/testimoniale': typeof TestimonialeRoute
   '/zona-de-acoperire': typeof ZonaDeAcoperireRoute
@@ -240,6 +249,7 @@ export interface FileRouteTypes {
     | '/preturi'
     | '/proces'
     | '/servicii'
+    | '/sitemap.xml'
     | '/termeni'
     | '/testimoniale'
     | '/zona-de-acoperire'
@@ -264,6 +274,7 @@ export interface FileRouteTypes {
     | '/preturi'
     | '/proces'
     | '/servicii'
+    | '/sitemap.xml'
     | '/termeni'
     | '/testimoniale'
     | '/zona-de-acoperire'
@@ -289,6 +300,7 @@ export interface FileRouteTypes {
     | '/preturi'
     | '/proces'
     | '/servicii'
+    | '/sitemap.xml'
     | '/termeni'
     | '/testimoniale'
     | '/zona-de-acoperire'
@@ -315,6 +327,7 @@ export interface RootRouteChildren {
   PreturiRoute: typeof PreturiRoute
   ProcesRoute: typeof ProcesRoute
   ServiciiRoute: typeof ServiciiRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermeniRoute: typeof TermeniRoute
   TestimonialeRoute: typeof TestimonialeRoute
   ZonaDeAcoperireRoute: typeof ZonaDeAcoperireRoute
@@ -409,6 +422,13 @@ declare module '@tanstack/react-router' {
       path: '/servicii'
       fullPath: '/servicii'
       preLoaderRoute: typeof ServiciiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/termeni': {
@@ -519,6 +539,7 @@ const rootRouteChildren: RootRouteChildren = {
   PreturiRoute: PreturiRoute,
   ProcesRoute: ProcesRoute,
   ServiciiRoute: ServiciiRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermeniRoute: TermeniRoute,
   TestimonialeRoute: TestimonialeRoute,
   ZonaDeAcoperireRoute: ZonaDeAcoperireRoute,
