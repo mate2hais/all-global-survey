@@ -10,6 +10,7 @@ const DESC =
   "De la primul telefon până la predarea documentului: pașii, documentele necesare și durata medie de livrare pentru certificate și audituri energetice.";
 
 export const Route = createFileRoute("/proces")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

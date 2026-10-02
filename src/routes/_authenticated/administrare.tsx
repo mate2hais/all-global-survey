@@ -56,6 +56,7 @@ import {
 } from "@/lib/request-status";
 
 export const Route = createFileRoute("/_authenticated/administrare")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "Panou de administrare — Auditor energetic Galați" },

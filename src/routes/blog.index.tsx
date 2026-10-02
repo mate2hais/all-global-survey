@@ -10,6 +10,7 @@ const DESC =
   "Articole practice despre certificate energetice, clădiri NZEB, audit energetic industrial și surse regenerabile, explicate pentru proprietari și firme din Galați.";
 
 export const Route = createFileRoute("/blog/")({
+  staticData: { sitemap: true },
   loader: async () => ({
     posts: await getPublicBlogPosts(),
     news: await getPublicNews(),

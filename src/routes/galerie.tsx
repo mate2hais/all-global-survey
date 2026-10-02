@@ -11,6 +11,7 @@ const DESC =
   "Imagini din lucrările de certificare energetică și audit energetic realizate în Galați și județul Galați.";
 
 export const Route = createFileRoute("/galerie")({
+  staticData: { sitemap: true },
   loader: () => getPublicGallery(),
   head: () => ({
     meta: [

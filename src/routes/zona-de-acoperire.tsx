@@ -10,6 +10,7 @@ const DESC =
   "Certificate și audituri energetice în municipiul Galați și în tot județul: Tecuci, Târgu Bujor, Berești și comunele din județul Galați.";
 
 export const Route = createFileRoute("/zona-de-acoperire")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

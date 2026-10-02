@@ -6,6 +6,7 @@ import { CONTACT, POSTS } from "@/lib/site-data";
 import { getPublicBlogPosts } from "@/lib/public-content.functions";
 
 export const Route = createFileRoute("/blog/$slug")({
+  staticData: { sitemap: true },
   loader: async ({ params }) => {
     const staticPost = POSTS.find((p) => p.slug === params.slug);
     if (staticPost) return { post: staticPost };

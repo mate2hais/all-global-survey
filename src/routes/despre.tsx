@@ -29,6 +29,7 @@ const DESC =
   "Auditor energetic pentru clădiri, Grad I, atestat CAA nr. 02471. Peste 4 ani de experiență în audituri energetice, studii SER / nZEB pentru clădiri publice, rezidențiale, administrative, medicale și educaționale.";
 
 export const Route = createFileRoute("/despre")({
+  staticData: { sitemap: true },
   loader: () => getSiteContent(),
   head: () => ({
     meta: [

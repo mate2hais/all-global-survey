@@ -11,6 +11,7 @@ const DESC =
   "Tarife orientative pentru certificat energetic apartament, casă, clădiri publice, audit energetic clădiri și audit industrial în Galați. Preț final fără surprize.";
 
 export const Route = createFileRoute("/preturi")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

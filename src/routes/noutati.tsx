@@ -10,6 +10,7 @@ const DESC =
   "Noutăți din domeniul performanței energetice a clădirilor și reglementări legislative actualizate, explicate de un auditor energetic Gradul I din Galați.";
 
 export const Route = createFileRoute("/noutati")({
+  staticData: { sitemap: true },
   loader: () => getPublicNews(),
   head: () => ({
     meta: [

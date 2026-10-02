@@ -25,6 +25,7 @@ const DESC =
   "Solicitați o ofertă pentru certificat sau audit energetic în Galați. Telefon 0773.932.496, formular online cu încărcare de documente și program de lucru.";
 
 export const Route = createFileRoute("/contact")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },
