@@ -54,14 +54,21 @@ export async function buildSitemapResponse(origin: string): Promise<Response> {
       .select("slug, updated_at, created_at")
       .eq("published", true);
     if (!error && Array.isArray(data)) {
-      for (const row of data as Array<{ slug: string; updated_at?: string | null; created_at?: string | null }>) {
+      const rows = data as unknown as Array<{
+        slug: string;
+        updated_at?: string | null;
+        created_at?: string | null;
+      }>;
+      for (const row of rows) {
         if (!row.slug) continue;
-        const lastmod = row.updated_at ?? row.created_at ?? undefined;
+        const lastmod = (row.updated_at ?? row.created_at ?? "").slice(0, 10);
         const existing = blogEntries.find((b) => b.slug === row.slug);
         if (existing) {
-          if (lastmod) existing.lastmod = lastmod.slice(0, 10);
+          if (lastmod) existing.lastmod = lastmod;
+        } else if (lastmod) {
+          blogEntries.push({ slug: row.slug, lastmod });
         } else {
-          blogEntries.push({ slug: row.slug, lastmod: lastmod?.slice(0, 10) });
+          blogEntries.push({ slug: row.slug });
         }
       }
     }
