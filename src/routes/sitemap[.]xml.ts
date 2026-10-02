@@ -38,9 +38,9 @@ export const Route = createFileRoute("/sitemap.xml")({
           for (let offset = 0; ; ) {
             const { data, error } = await supabase
               .from("blog_posts")
-              .select("slug, created_at, updated_at")
+              .select("slug, published_at")
               .eq("published", true)
-              .order("created_at", { ascending: true })
+              .order("published_at", { ascending: true })
               .range(offset, offset + pageSize - 1);
             if (error) throw new Error(`blog_posts query failed: ${error.message}`);
             if (!data || data.length === 0) break;
