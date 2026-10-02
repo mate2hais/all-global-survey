@@ -16,6 +16,7 @@ import {
 import { REQUEST_STATUSES, normalizeStatus, statusLabel, statusTone } from "@/lib/request-status";
 
 export const Route = createFileRoute("/_authenticated/solicitari/")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "Solicitări — administrare" },

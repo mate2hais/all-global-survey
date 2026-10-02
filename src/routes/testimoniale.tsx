@@ -14,6 +14,7 @@ const DESC =
   "Recenzii de la proprietari, asociații și firme din Galați, plus studii de caz pentru un audit industrial și o clădire NZEB.";
 
 export const Route = createFileRoute("/testimoniale")({
+  staticData: { sitemap: true },
   loader: () => getPublicTestimonials(),
   head: () => ({
     meta: [

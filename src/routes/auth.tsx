@@ -11,6 +11,7 @@ const TITLE = "Autentificare administrare — Auditor energetic Galați";
 const DESC = "Zonă de administrare a site-ului. Acces doar pentru personalul autorizat.";
 
 export const Route = createFileRoute("/auth")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: TITLE },

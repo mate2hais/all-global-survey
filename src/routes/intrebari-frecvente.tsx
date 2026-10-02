@@ -17,6 +17,7 @@ const DESC =
   "Ce este certificatul energetic, diferența față de audit, ce înseamnă Gradul I, standardul NZEB, costuri, durate și valabilitatea de 10 ani.";
 
 export const Route = createFileRoute("/intrebari-frecvente")({
+  staticData: { sitemap: true },
   loader: () => getPublicFaq(),
   head: () => ({
     meta: [

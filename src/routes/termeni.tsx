@@ -7,6 +7,7 @@ const DESC =
   "Condițiile de utilizare a site-ului și de prestare a serviciilor de audit și certificare energetică.";
 
 export const Route = createFileRoute("/termeni")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

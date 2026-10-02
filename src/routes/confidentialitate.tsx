@@ -7,6 +7,7 @@ const DESC =
   "Cum sunt colectate, folosite și protejate datele personale transmise prin formularul de contact sau telefonic.";
 
 export const Route = createFileRoute("/confidentialitate")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

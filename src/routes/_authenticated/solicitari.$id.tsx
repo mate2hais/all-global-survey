@@ -10,6 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { REQUEST_STATUSES, normalizeStatus, statusLabel, statusTone } from "@/lib/request-status";
 
 export const Route = createFileRoute("/_authenticated/solicitari/$id")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "Detalii solicitare — administrare" },

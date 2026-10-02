@@ -10,6 +10,7 @@ const DESC =
   "Certificate de performanță energetică, audit energetic pentru clădiri și blocuri, audit industrial, consultanță NZEB și SER în Galați și județ.";
 
 export const Route = createFileRoute("/servicii")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },
