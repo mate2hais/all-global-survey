@@ -53,7 +53,7 @@ export const Route = createFileRoute("/sitemap.xml")({
               });
               const path = sitemapPathForLocation(router, location, "/blog/$slug");
               if (path) {
-                entries.push({ path, lastmod: row.updated_at ?? row.created_at ?? undefined });
+                entries.push({ path, lastmod: row.published_at ?? undefined });
               }
             }
             offset += data.length;
