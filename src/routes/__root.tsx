@@ -4,11 +4,13 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
   type ErrorComponentProps,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
+import { createServerFn } from "@tanstack/react-start";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -79,8 +81,64 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
   );
 }
 
+type GTagFn = (...args: unknown[]) => void;
+
+// Google Analytics measurement ID lives in the secret store; it is a public
+// identifier (safe for the browser), but it must be read server-side and
+// handed to the client through a server function.
+const getAnalyticsConfig = createServerFn({ method: "GET" }).handler(() => ({
+  measurementId: process.env["GOOGLE_ANALYTICS_MEASUREMENT_ID"] ?? null,
+}));
+
+function GoogleAnalytics() {
+  const { measurementId } = Route.useLoaderData();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const isFirstRender = useRef(true);
+
+  useEffect(() => {
+    if (!measurementId) return;
+    const w = window as unknown as { dataLayer?: unknown[]; gtag?: GTagFn };
+    w.dataLayer = w.dataLayer || [];
+    if (w.gtag) return;
+    const gtagFn: GTagFn = (...args) => {
+      w.dataLayer!.push(args);
+    };
+    w.gtag = gtagFn;
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
+    document.head.appendChild(script);
+    gtagFn("set", "developer_id.dZjgwMW", true);
+    gtagFn("js", new Date());
+    gtagFn("config", measurementId);
+  }, [measurementId]);
+
+  // SPA navigations don't reload the page, so report each route change.
+  useEffect(() => {
+    if (!measurementId) return;
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return; // initial page_view is sent by gtag("config", ...)
+    }
+    const w = window as unknown as { gtag?: GTagFn };
+    w.gtag?.("event", "page_view", {
+      page_path: pathname,
+      page_title: document.title,
+    });
+  }, [pathname, measurementId]);
+
+  return null;
+}
+
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   staticData: { sitemap: false },
+  loader: async () => {
+    try {
+      return await getAnalyticsConfig();
+    } catch {
+      return { measurementId: null as string | null };
+    }
+  },
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -158,6 +216,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <GoogleAnalytics />
       <div className="flex min-h-screen flex-col font-[Manrope,ui-sans-serif,system-ui]">
         <Header />
         <main className="flex-1">
