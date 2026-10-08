@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 // Stable, non-expiring image URL for published gallery images.
 // Streams the file from the private bucket; only published rows are served.
 export const Route = createFileRoute("/api/public/galerie/$id")({
+  staticData: { sitemap: false },
   server: {
     handlers: {
       GET: async ({ params }) => {
