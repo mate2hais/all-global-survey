@@ -219,6 +219,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
             "NZEB",
             "surse de energie regenerabilă",
           ],
+          sameAs: [
+            "https://www.google.com/search?q=Energy+Pro+Gala%C8%9Bi&stick=H4sIAAAAAAAAAONgU1I1qDAyTzEySDO2NLJMMbNMMTC2MqhIszSzTDMzM0wyT7QwNk82XsQq5JqXWpReqRBQlK_gnpiTeGJ2JgBe78v6PgAAAA",
+            "https://galati.cylex.ro/firma/energy+pro+gala%c8%9bi-1502769.html",
+          ],
         }),
       },
     ],
