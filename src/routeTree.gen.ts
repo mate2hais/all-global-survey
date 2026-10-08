@@ -30,6 +30,7 @@ import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AuthenticatedSolicitariIndexRouteImport } from './routes/_authenticated/solicitari.index'
 import { Route as AuthenticatedSolicitariIdRouteImport } from './routes/_authenticated/solicitari.$id'
+import { Route as ApiPublicGalerieIdRouteImport } from './routes/api/public/galerie.$id'
 import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
 import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
@@ -141,6 +142,11 @@ const AuthenticatedSolicitariIdRoute =
     path: '/solicitari/$id',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const ApiPublicGalerieIdRoute = ApiPublicGalerieIdRouteImport.update({
+  id: '/api/public/galerie/$id',
+  path: '/api/public/galerie/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LovableEmailAuthPreviewRoute = LovableEmailAuthPreviewRouteImport.update({
   id: '/lovable/email/auth/preview',
   path: '/lovable/email/auth/preview',
@@ -179,6 +185,7 @@ export interface FileRoutesByFullPath {
   '/blog/': typeof BlogIndexRoute
   '/solicitari/$id': typeof AuthenticatedSolicitariIdRoute
   '/solicitari/': typeof AuthenticatedSolicitariIndexRoute
+  '/api/public/galerie/$id': typeof ApiPublicGalerieIdRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
@@ -204,6 +211,7 @@ export interface FileRoutesByTo {
   '/blog': typeof BlogIndexRoute
   '/solicitari/$id': typeof AuthenticatedSolicitariIdRoute
   '/solicitari': typeof AuthenticatedSolicitariIndexRoute
+  '/api/public/galerie/$id': typeof ApiPublicGalerieIdRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
@@ -231,6 +239,7 @@ export interface FileRoutesById {
   '/blog/': typeof BlogIndexRoute
   '/_authenticated/solicitari/$id': typeof AuthenticatedSolicitariIdRoute
   '/_authenticated/solicitari/': typeof AuthenticatedSolicitariIndexRoute
+  '/api/public/galerie/$id': typeof ApiPublicGalerieIdRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
@@ -258,6 +267,7 @@ export interface FileRouteTypes {
     | '/blog/'
     | '/solicitari/$id'
     | '/solicitari/'
+    | '/api/public/galerie/$id'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/transactional/preview'
@@ -283,6 +293,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/solicitari/$id'
     | '/solicitari'
+    | '/api/public/galerie/$id'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/transactional/preview'
@@ -309,6 +320,7 @@ export interface FileRouteTypes {
     | '/blog/'
     | '/_authenticated/solicitari/$id'
     | '/_authenticated/solicitari/'
+    | '/api/public/galerie/$id'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/transactional/preview'
@@ -333,6 +345,7 @@ export interface RootRouteChildren {
   ZonaDeAcoperireRoute: typeof ZonaDeAcoperireRoute
   BlogSlugRoute: typeof BlogSlugRoute
   BlogIndexRoute: typeof BlogIndexRoute
+  ApiPublicGalerieIdRoute: typeof ApiPublicGalerieIdRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
   LovableEmailAuthWebhookRoute: typeof LovableEmailAuthWebhookRoute
   LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
@@ -487,6 +500,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSolicitariIdRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/api/public/galerie/$id': {
+      id: '/api/public/galerie/$id'
+      path: '/api/public/galerie/$id'
+      fullPath: '/api/public/galerie/$id'
+      preLoaderRoute: typeof ApiPublicGalerieIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lovable/email/auth/preview': {
       id: '/lovable/email/auth/preview'
       path: '/lovable/email/auth/preview'
@@ -545,6 +565,7 @@ const rootRouteChildren: RootRouteChildren = {
   ZonaDeAcoperireRoute: ZonaDeAcoperireRoute,
   BlogSlugRoute: BlogSlugRoute,
   BlogIndexRoute: BlogIndexRoute,
+  ApiPublicGalerieIdRoute: ApiPublicGalerieIdRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
   LovableEmailAuthWebhookRoute: LovableEmailAuthWebhookRoute,
   LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,

@@ -70,21 +70,12 @@ export const getPublicGallery = createServerFn({ method: "GET" }).handler(async 
     .select("id, title, image_url, storage_path, sort_order, published")
     .eq("published", true)
     .order("sort_order", { ascending: true });
-  const rows = data ?? [];
-  if (rows.length === 0) return [];
-  const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-  const out: { id: string; title: string; url: string }[] = [];
-  for (const row of rows) {
-    let url = row.image_url;
-    if (row.storage_path) {
-      const signed = await supabaseAdmin.storage
-        .from("media")
-        .createSignedUrl(row.storage_path, 60 * 60 * 24);
-      if (signed.data?.signedUrl) url = signed.data.signedUrl;
-    }
-    out.push({ id: row.id, title: row.title ?? "Imagine", url });
-  }
-  return out;
+  // Stable URLs via the internal proxy route — no expiring tokens.
+  return (data ?? []).map((row) => ({
+    id: row.id,
+    title: row.title ?? "Imagine",
+    url: row.storage_path ? `/api/public/galerie/${row.id}` : row.image_url,
+  }));
 });
 
 export const getSiteContent = createServerFn({ method: "GET" }).handler(async () => {
