@@ -100,8 +100,10 @@ function GoogleAnalytics() {
     const w = window as unknown as { dataLayer?: unknown[]; gtag?: GTagFn };
     w.dataLayer = w.dataLayer || [];
     if (w.gtag) return;
-    const gtagFn: GTagFn = (...args) => {
-      w.dataLayer!.push(args);
+    // gtag.js only processes the Arguments object, not plain arrays.
+    const gtagFn: GTagFn = function () {
+      // eslint-disable-next-line prefer-rest-params
+      w.dataLayer!.push(arguments);
     };
     w.gtag = gtagFn;
     const script = document.createElement("script");
