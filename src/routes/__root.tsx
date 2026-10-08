@@ -13,6 +13,7 @@ import { useEffect, useRef, type ReactNode } from "react";
 import { createServerFn } from "@tanstack/react-start";
 
 import appCss from "../styles.css?url";
+import heroImg from "@/assets/hero-cladiri.jpg";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
@@ -172,16 +173,45 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "ProfessionalService",
-          name: "Iulian Gabriel Panainte — Auditor Energetic Gradul I",
+          "@type": ["LocalBusiness", "ProfessionalService"],
+          "@id": "https://certificatenergeticgalati.ro/#business",
+          name: "Energy Pro Galați",
+          legalName: "All Global Survey S.R.L.",
+          description:
+            "Audit energetic și certificate de performanță energetică în Galați și județul Galați: clădiri rezidențiale, publice și industriale, consultanță nZEB și SER.",
           telephone: "+40773932496",
-          areaServed: "Județul Galați, România",
+          email: "certificatenergeticgalati@yahoo.com",
+          url: "https://certificatenergeticgalati.ro",
+          image: `https://certificatenergeticgalati.ro${heroImg}`,
+          priceRange: "$$",
           address: {
             "@type": "PostalAddress",
             addressLocality: "Galați",
             addressRegion: "Galați",
             addressCountry: "RO",
           },
+          areaServed: [
+            "Galați",
+            "Tecuci",
+            "Târgu Bujor",
+            "Berești",
+            "Comunele din județul Galați",
+          ].map((name) => ({ "@type": "Place", name })),
+          openingHours: ["Mo-Fr 08:00-19:00", "Sa 09:00-14:00"],
+          openingHoursSpecification: [
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+              opens: "08:00",
+              closes: "19:00",
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: "Saturday",
+              opens: "09:00",
+              closes: "14:00",
+            },
+          ],
           knowsAbout: [
             "certificat energetic",
             "audit energetic",
