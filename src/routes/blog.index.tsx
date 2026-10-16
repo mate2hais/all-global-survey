@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, CalendarDays, Clock, Newspaper } from "lucide-react";
+import { ArrowRight, Clock, Newspaper } from "lucide-react";
+import { RelativeDate } from "@/components/site/RelativeDate";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
 import { POSTS } from "@/lib/site-data";
@@ -82,14 +83,7 @@ function BlogIndex() {
               className="surface-card flex h-full flex-col p-7"
             >
               <div className="flex gap-4 text-xs text-muted-foreground">
-                <span className="inline-flex items-center gap-1.5">
-                  <CalendarDays className="size-3.5" />
-                  {new Date(p.date).toLocaleDateString("ro-RO", {
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric",
-                  })}
-                </span>
+                <RelativeDate date={p.date} className="inline-flex items-center gap-1.5" />
                 <span className="inline-flex items-center gap-1.5">
                   <Clock className="size-3.5" /> {p.readTime}
                 </span>
