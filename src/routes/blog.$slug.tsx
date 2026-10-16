@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, CalendarDays, Clock, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Reveal } from "@/components/site/Reveal";
+import { BlogBlocks, parseBlog, type Block } from "@/lib/blog-markdown";
 import { CONTACT, POSTS } from "@/lib/site-data";
 import { getPublicBlogPosts } from "@/lib/public-content.functions";
 
@@ -9,22 +9,27 @@ export const Route = createFileRoute("/blog/$slug")({
   staticData: { sitemap: true },
   loader: async ({ params }) => {
     const staticPost = POSTS.find((p) => p.slug === params.slug);
-    if (staticPost) return { post: staticPost };
+    if (staticPost) {
+      const blocks: Block[] = [];
+      for (const s of staticPost.body) {
+        if (s.heading) blocks.push({ type: "h", text: s.heading });
+        for (const p of s.paragraphs) blocks.push({ type: "p", text: p });
+      }
+      return {
+        post: {
+          slug: staticPost.slug,
+          title: staticPost.title,
+          excerpt: staticPost.excerpt,
+          date: staticPost.date,
+          readTime: staticPost.readTime,
+          imageUrl: null as string | null,
+          blocks,
+        },
+      };
+    }
     const dbPosts = await getPublicBlogPosts();
     const row = dbPosts.find((p) => p.slug === params.slug);
     if (!row) throw notFound();
-    const body: { heading: string; paragraphs: string[] }[] = [];
-    for (const block of row.content.split(/\n\s*\n/)) {
-      const trimmed = block.trim();
-      if (!trimmed) continue;
-      if (trimmed.startsWith("#")) {
-        body.push({ heading: trimmed.replace(/^#+\s*/, ""), paragraphs: [] });
-      } else if (body.length > 0) {
-        body[body.length - 1]!.paragraphs.push(trimmed);
-      } else {
-        body.push({ heading: "", paragraphs: [trimmed] });
-      }
-    }
     return {
       post: {
         slug: row.slug,
@@ -32,7 +37,8 @@ export const Route = createFileRoute("/blog/$slug")({
         excerpt: row.excerpt,
         date: row.published_at,
         readTime: row.read_time,
-        body,
+        imageUrl: row.image_url,
+        blocks: parseBlog(row.content),
       },
     };
   },
@@ -103,19 +109,18 @@ function BlogPost() {
         </span>
       </div>
       <p className="mt-6 text-lg text-muted-foreground">{post.excerpt}</p>
+      {post.imageUrl && (
+        <img
+          src={post.imageUrl}
+          alt={post.title}
+          width={1200}
+          height={800}
+          decoding="async"
+          className="mt-8 aspect-[3/2] w-full rounded-2xl object-cover"
+        />
+      )}
 
-      <div className="mt-10 space-y-9">
-        {post.body.map((section, i) => (
-          <Reveal key={section.heading || i} delay={i * 60}>
-            {section.heading && <h2 className="text-xl font-bold">{section.heading}</h2>}
-            {section.paragraphs.map((p) => (
-              <p key={p} className="mt-3 text-muted-foreground">
-                {p}
-              </p>
-            ))}
-          </Reveal>
-        ))}
-      </div>
+      <BlogBlocks blocks={post.blocks} />
 
       <div className="mt-14 rounded-2xl bg-[image:var(--gradient-primary)] p-8 text-center text-primary-foreground">
         <p className="text-lg font-semibold">Aveți o situație concretă de lămurit?</p>
