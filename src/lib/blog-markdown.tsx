@@ -45,10 +45,66 @@ export function renderInline(text: string): ReactNode {
   });
 }
 
-export function BlogBlocks({ blocks }: { blocks: Block[] }) {
+/** Where to place inline images: before evenly spread headings (skipping the first), else at the end. */
+export function imageSlots(blocks: Block[], count: number): number[] {
+  const heads = blocks.map((b, i) => (b.type === "h" ? i : -1)).filter((i) => i > 0);
+  const slots: number[] = [];
+  for (let k = 0; k < count; k++) {
+    const pick = heads.length
+      ? heads[Math.min(heads.length - 1, Math.floor(((k + 1) * heads.length) / (count + 1)))]!
+      : blocks.length;
+    slots.push(slots.includes(pick) ? blocks.length : pick);
+  }
+  return slots;
+}
+
+export function BlogBlocks({
+  blocks,
+  images = [],
+  title = "",
+}: {
+  blocks: Block[];
+  images?: string[];
+  title?: string;
+}) {
+  const slots = imageSlots(blocks, images.length);
+  const imgAt = (pos: number) =>
+    images
+      .map((url, k) => ({ url, k }))
+      .filter(({ k }) => slots[k] === pos)
+      .map(({ url, k }) => (
+        <img
+          key={`img-${k}`}
+          src={url}
+          alt={`${title} — imagine ${k + 1}`}
+          width={1200}
+          height={800}
+          loading="lazy"
+          decoding="async"
+          className="my-8 aspect-[3/2] w-full rounded-2xl object-cover"
+        />
+      ));
   return (
     <div className="mt-10 space-y-5">
       {blocks.map((b, i) => {
+        const before = imgAt(i);
+        const el = renderBlock(b, i);
+        return before.length ? (
+          <Fragment key={i}>
+            {before}
+            {el}
+          </Fragment>
+        ) : (
+          el
+        );
+      })}
+      {imgAt(blocks.length)}
+    </div>
+  );
+}
+
+function renderBlock(b: Block, i: number) {
+  {
         if (b.type === "h")
           return (
             <h2 key={i} className="pt-4 text-xl font-bold">
@@ -79,7 +135,5 @@ export function BlogBlocks({ blocks }: { blocks: Block[] }) {
             {renderInline(b.text)}
           </p>
         );
-      })}
-    </div>
-  );
+  }
 }

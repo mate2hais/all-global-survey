@@ -50,6 +50,13 @@
       "when": 1790523378700,
       "tag": "0006_prices_grants",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1792157096398,
+      "tag": "0007_blog_content_images",
+      "breakpoints": true
     }
   ]
 }

@@ -58,7 +58,7 @@ export const getPublicFaq = createServerFn({ method: "GET" }).handler(async () =
 export const getPublicBlogPosts = createServerFn({ method: "GET" }).handler(async () => {
   const { data } = await publicClient()
     .from("blog_posts")
-    .select("id, slug, title, excerpt, content, image_url, read_time, published_at")
+    .select("id, slug, title, excerpt, content, image_url, content_images, read_time, published_at")
     .eq("published", true)
     .order("published_at", { ascending: false });
   return data ?? [];

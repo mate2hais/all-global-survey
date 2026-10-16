@@ -31,6 +31,7 @@ export type BlogRow = {
   excerpt: string;
   content: string;
   image_url: string | null;
+  content_images: string[];
   read_time: string;
   published: boolean;
   published_at: string;
@@ -429,8 +430,135 @@ export function BlogPanel({
             </div>
           </div>
           {row.excerpt && <p className="mt-3 text-sm text-muted-foreground">{row.excerpt}</p>}
+          <BlogImagesEditor row={row} imageOptions={imageOptions} onChanged={onChanged} />
         </div>
       ))}
+    </div>
+  );
+}
+
+async function uploadBlogImage(file: File): Promise<string> {
+  const name = `${crypto.randomUUID()}-${file.name.replace(/[^\w.-]/g, "_")}`;
+  const { error } = await supabase.storage.from("media").upload(`blog/${name}`, file);
+  if (error) throw error;
+  return `/api/public/blog-imagine/${name}`;
+}
+
+function ImageSlot({
+  label,
+  value,
+  imageOptions,
+  onChange,
+}: {
+  label: string;
+  value: string;
+  imageOptions: { url: string; title: string }[];
+  onChange: (url: string) => void;
+}) {
+  const [busy, setBusy] = useState(false);
+  return (
+    <div className="grid gap-2 rounded-lg border border-border p-3">
+      <Label className="text-xs font-semibold">{label}</Label>
+      {value ? (
+        <img src={value} alt={label} width={300} height={200} className="aspect-[3/2] w-full rounded-md object-cover" />
+      ) : (
+        <div className="grid aspect-[3/2] w-full place-items-center rounded-md bg-muted text-xs text-muted-foreground">
+          Fără imagine
+        </div>
+      )}
+      <Input
+        type="file"
+        accept="image/*"
+        disabled={busy}
+        onChange={async (e) => {
+          const f = e.target.files?.[0];
+          if (!f) return;
+          setBusy(true);
+          try {
+            onChange(await uploadBlogImage(f));
+          } catch {
+            toast.error("Încărcare eșuată.");
+          } finally {
+            setBusy(false);
+            e.target.value = "";
+          }
+        }}
+      />
+      <select
+        className="h-9 rounded-md border border-input bg-background px-2 text-xs"
+        value=""
+        onChange={(e) => e.target.value && onChange(e.target.value)}
+      >
+        <option value="">…sau alege din Galerie lucrări</option>
+        {imageOptions.map((img) => (
+          <option key={img.url} value={img.url}>
+            {img.title}
+          </option>
+        ))}
+      </select>
+      {value && (
+        <Button variant="outline" size="sm" onClick={() => onChange("")}>
+          <Trash2 className="size-3.5" /> Elimină
+        </Button>
+      )}
+    </div>
+  );
+}
+
+function BlogImagesEditor({
+  row,
+  imageOptions,
+  onChanged,
+}: {
+  row: BlogRow;
+  imageOptions: { url: string; title: string }[];
+  onChanged: () => Promise<void>;
+}) {
+  const [open, setOpen] = useState(false);
+  const [cover, setCover] = useState(row.image_url ?? "");
+  const [inner, setInner] = useState<string[]>(() => {
+    const a = [...(row.content_images ?? [])];
+    while (a.length < 3) a.push("");
+    return a.slice(0, 3);
+  });
+
+  async function save() {
+    const { error } = await supabase
+      .from("blog_posts")
+      .update({ image_url: cover || null, content_images: inner.filter(Boolean) })
+      .eq("id", row.id);
+    if (error) toast.error("Salvare eșuată: " + error.message);
+    else {
+      toast.success("Imagini salvate.");
+      await onChanged();
+    }
+  }
+
+  const count = (row.image_url ? 1 : 0) + (row.content_images?.length ?? 0);
+  return (
+    <div className="mt-4">
+      <Button variant="soft" size="sm" onClick={() => setOpen((o) => !o)}>
+        {open ? "Închide imaginile" : `Imagini articol (${count}/4)`}
+      </Button>
+      {open && (
+        <div className="mt-4 grid gap-4">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <ImageSlot label="Copertă" value={cover} imageOptions={imageOptions} onChange={setCover} />
+            {inner.map((v, i) => (
+              <ImageSlot
+                key={i}
+                label={`Imagine în text ${i + 1}`}
+                value={v}
+                imageOptions={imageOptions}
+                onChange={(url) => setInner((a) => a.map((x, j) => (j === i ? url : x)))}
+              />
+            ))}
+          </div>
+          <Button variant="cta" className="w-fit" onClick={() => void save()}>
+            <Save className="size-4" /> Salvează imaginile
+          </Button>
+        </div>
+      )}
     </div>
   );
 }

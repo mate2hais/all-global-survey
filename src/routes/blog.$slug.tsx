@@ -23,6 +23,7 @@ export const Route = createFileRoute("/blog/$slug")({
           date: staticPost.date,
           readTime: staticPost.readTime,
           imageUrl: null as string | null,
+          contentImages: [] as string[],
           blocks,
         },
       };
@@ -38,6 +39,7 @@ export const Route = createFileRoute("/blog/$slug")({
         date: row.published_at,
         readTime: row.read_time,
         imageUrl: row.image_url,
+        contentImages: (row.content_images ?? []).filter(Boolean),
         blocks: parseBlog(row.content),
       },
     };
@@ -120,7 +122,7 @@ function BlogPost() {
         />
       )}
 
-      <BlogBlocks blocks={post.blocks} />
+      <BlogBlocks blocks={post.blocks} images={post.contentImages} title={post.title} />
 
       <div className="mt-14 rounded-2xl bg-[image:var(--gradient-primary)] p-8 text-center text-primary-foreground">
         <p className="text-lg font-semibold">Aveți o situație concretă de lămurit?</p>

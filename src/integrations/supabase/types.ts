@@ -68,6 +68,7 @@ export type Database = {
       blog_posts: {
         Row: {
           content: string
+          content_images: string[]
           excerpt: string
           id: string
           image_url: string | null
@@ -79,6 +80,7 @@ export type Database = {
         }
         Insert: {
           content?: string
+          content_images?: string[]
           excerpt?: string
           id?: string
           image_url?: string | null
@@ -90,6 +92,7 @@ export type Database = {
         }
         Update: {
           content?: string
+          content_images?: string[]
           excerpt?: string
           id?: string
           image_url?: string | null

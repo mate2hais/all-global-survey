@@ -30,6 +30,7 @@ import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AuthenticatedSolicitariIndexRouteImport } from './routes/_authenticated/solicitari.index'
 import { Route as AuthenticatedSolicitariIdRouteImport } from './routes/_authenticated/solicitari.$id'
+import { Route as ApiPublicBlogImagineNameRouteImport } from './routes/api/public/blog-imagine.$name'
 import { Route as ApiPublicGalerieIdRouteImport } from './routes/api/public/galerie.$id'
 import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
 import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
@@ -142,6 +143,12 @@ const AuthenticatedSolicitariIdRoute =
     path: '/solicitari/$id',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const ApiPublicBlogImagineNameRoute =
+  ApiPublicBlogImagineNameRouteImport.update({
+    id: '/api/public/blog-imagine/$name',
+    path: '/api/public/blog-imagine/$name',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicGalerieIdRoute = ApiPublicGalerieIdRouteImport.update({
   id: '/api/public/galerie/$id',
   path: '/api/public/galerie/$id',
@@ -185,6 +192,7 @@ export interface FileRoutesByFullPath {
   '/blog/': typeof BlogIndexRoute
   '/solicitari/$id': typeof AuthenticatedSolicitariIdRoute
   '/solicitari/': typeof AuthenticatedSolicitariIndexRoute
+  '/api/public/blog-imagine/$name': typeof ApiPublicBlogImagineNameRoute
   '/api/public/galerie/$id': typeof ApiPublicGalerieIdRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
@@ -211,6 +219,7 @@ export interface FileRoutesByTo {
   '/blog': typeof BlogIndexRoute
   '/solicitari/$id': typeof AuthenticatedSolicitariIdRoute
   '/solicitari': typeof AuthenticatedSolicitariIndexRoute
+  '/api/public/blog-imagine/$name': typeof ApiPublicBlogImagineNameRoute
   '/api/public/galerie/$id': typeof ApiPublicGalerieIdRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
@@ -239,6 +248,7 @@ export interface FileRoutesById {
   '/blog/': typeof BlogIndexRoute
   '/_authenticated/solicitari/$id': typeof AuthenticatedSolicitariIdRoute
   '/_authenticated/solicitari/': typeof AuthenticatedSolicitariIndexRoute
+  '/api/public/blog-imagine/$name': typeof ApiPublicBlogImagineNameRoute
   '/api/public/galerie/$id': typeof ApiPublicGalerieIdRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
@@ -267,6 +277,7 @@ export interface FileRouteTypes {
     | '/blog/'
     | '/solicitari/$id'
     | '/solicitari/'
+    | '/api/public/blog-imagine/$name'
     | '/api/public/galerie/$id'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
@@ -293,6 +304,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/solicitari/$id'
     | '/solicitari'
+    | '/api/public/blog-imagine/$name'
     | '/api/public/galerie/$id'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
@@ -320,6 +332,7 @@ export interface FileRouteTypes {
     | '/blog/'
     | '/_authenticated/solicitari/$id'
     | '/_authenticated/solicitari/'
+    | '/api/public/blog-imagine/$name'
     | '/api/public/galerie/$id'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
@@ -345,6 +358,7 @@ export interface RootRouteChildren {
   ZonaDeAcoperireRoute: typeof ZonaDeAcoperireRoute
   BlogSlugRoute: typeof BlogSlugRoute
   BlogIndexRoute: typeof BlogIndexRoute
+  ApiPublicBlogImagineNameRoute: typeof ApiPublicBlogImagineNameRoute
   ApiPublicGalerieIdRoute: typeof ApiPublicGalerieIdRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
   LovableEmailAuthWebhookRoute: typeof LovableEmailAuthWebhookRoute
@@ -500,6 +514,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSolicitariIdRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/api/public/blog-imagine/$name': {
+      id: '/api/public/blog-imagine/$name'
+      path: '/api/public/blog-imagine/$name'
+      fullPath: '/api/public/blog-imagine/$name'
+      preLoaderRoute: typeof ApiPublicBlogImagineNameRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/galerie/$id': {
       id: '/api/public/galerie/$id'
       path: '/api/public/galerie/$id'
@@ -565,6 +586,7 @@ const rootRouteChildren: RootRouteChildren = {
   ZonaDeAcoperireRoute: ZonaDeAcoperireRoute,
   BlogSlugRoute: BlogSlugRoute,
   BlogIndexRoute: BlogIndexRoute,
+  ApiPublicBlogImagineNameRoute: ApiPublicBlogImagineNameRoute,
   ApiPublicGalerieIdRoute: ApiPublicGalerieIdRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
   LovableEmailAuthWebhookRoute: LovableEmailAuthWebhookRoute,
