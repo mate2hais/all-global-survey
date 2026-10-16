@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft, Clock, Phone } from "lucide-react";
+import { ArrowLeft, Phone } from "lucide-react";
 import { RelativeDate } from "@/components/site/RelativeDate";
 import { Button } from "@/components/ui/button";
 import { BlogBlocks, parseBlog, type Block } from "@/lib/blog-markdown";
@@ -100,9 +100,6 @@ function BlogPost() {
       <h1 className="mt-6 text-3xl font-bold md:text-4xl">{post.title}</h1>
       <div className="mt-4 flex gap-4 text-xs text-muted-foreground">
         <RelativeDate date={post.date} className="inline-flex items-center gap-1.5" />
-        <span className="inline-flex items-center gap-1.5">
-          <Clock className="size-3.5" /> {post.readTime}
-        </span>
       </div>
       <p className="mt-6 text-lg text-muted-foreground">{post.excerpt}</p>
       {post.imageUrl && (
