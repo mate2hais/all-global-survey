@@ -48,15 +48,12 @@ export function renderInline(text: string): ReactNode {
 /** Where to place inline images: before evenly spread headings (skipping the first), else at the end. */
 export function imageSlots(blocks: Block[], count: number): number[] {
   const heads = blocks.map((b, i) => (b.type === "h" ? i : -1)).filter((i) => i > 0);
-  const candidates = heads.slice(1).length >= count ? heads.slice(1) : heads;
   const slots: number[] = [];
   for (let k = 0; k < count; k++) {
-    if (candidates.length === 0) slots.push(blocks.length);
-    else {
-      const idx = Math.round(((k + 1) * candidates.length) / (count + 1)) - (count >= candidates.length ? 1 : 0);
-      const pick = candidates[Math.min(Math.max(idx, 0), candidates.length - 1)]!;
-      slots.push(slots.includes(pick) ? blocks.length : pick);
-    }
+    const pick = heads.length
+      ? heads[Math.min(heads.length - 1, Math.floor(((k + 1) * heads.length) / (count + 1)))]!
+      : blocks.length;
+    slots.push(slots.includes(pick) ? blocks.length : pick);
   }
   return slots;
 }
