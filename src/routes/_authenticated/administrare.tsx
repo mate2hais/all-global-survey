@@ -337,7 +337,10 @@ function AdminPage() {
           <BlogPanel
             rows={posts}
             onChanged={load}
-            imageOptions={gallery.map((g) => ({ url: g.image_url, title: g.title ?? "Imagine" }))}
+            imageOptions={gallery.map((g) => ({
+              url: g.storage_path ? `/api/public/galerie/${g.id}` : g.image_url,
+              title: g.title ?? "Imagine",
+            }))}
           />
         </TabsContent>
 
