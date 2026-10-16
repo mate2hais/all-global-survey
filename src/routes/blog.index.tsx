@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Clock, Newspaper } from "lucide-react";
+import { ArrowRight, Newspaper } from "lucide-react";
 import { RelativeDate } from "@/components/site/RelativeDate";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
@@ -84,9 +84,6 @@ function BlogIndex() {
             >
               <div className="flex gap-4 text-xs text-muted-foreground">
                 <RelativeDate date={p.date} className="inline-flex items-center gap-1.5" />
-                <span className="inline-flex items-center gap-1.5">
-                  <Clock className="size-3.5" /> {p.readTime}
-                </span>
               </div>
               <h2 className="mt-3 text-lg font-semibold">{p.title}</h2>
               <p className="mt-2 flex-1 text-sm text-muted-foreground">{p.excerpt}</p>
