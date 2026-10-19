@@ -8,3 +8,4 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+- Blog "Articole înrudite" come from the hand-curated slug map in src/lib/blog-related.ts, never auto-generated — the owner picks them for SEO.
