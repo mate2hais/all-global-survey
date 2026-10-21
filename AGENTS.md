@@ -9,3 +9,4 @@
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
 - Blog "Articole înrudite" come from the hand-curated slug map in src/lib/blog-related.ts, never auto-generated — the owner picks them for SEO.
+- Leaflet maps live in browser-only component modules loaded via React.lazy behind <ClientOnly>, with shared data in a separate module — Leaflet touches window at import and breaks SSR.
