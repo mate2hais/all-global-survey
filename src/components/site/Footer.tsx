@@ -104,8 +104,9 @@ export function Footer() {
               href="https://mtech-design.ro"
               target="_blank"
               rel="noopener"
-              className="transition-colors hover:text-primary-glow"
+              className="inline-flex items-center gap-1.5 align-middle transition-colors hover:text-primary-glow"
             >
+              <img src="/mtech-design-logo.svg" alt="" width="20" height="20" aria-hidden="true" />
               Mtech Design
             </a>
           </p>
