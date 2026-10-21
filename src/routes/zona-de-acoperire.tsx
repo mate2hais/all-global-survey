@@ -1,4 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { ClientOnly, createFileRoute } from "@tanstack/react-router";
+import { lazy, Suspense, useState } from "react";
+import { COMUNE, type Localitate } from "@/lib/comune-galati";
 import { Phone, MapPin, Car } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PageHero } from "@/components/site/PageHero";
@@ -25,13 +27,10 @@ export const Route = createFileRoute("/zona-de-acoperire")({
   component: ZonaPage,
 });
 
-const COMUNE = [
-  "Pechea", "Independența", "Șendreni", "Vânători", "Smârdan", "Tulucești", "Liești", "Ivești",
-  "Matca", "Corod", "Cudalbi", "Umbrărești", "Braniștea", "Frumușița", "Foltești", "Măstăcani",
-  "Nămoloasa", "Barcea", "Munteni", "Drăgănești", "Schela", "Costache Negri", "Piscu", "Slobozia Conachi",
-];
+const CoverageMap = lazy(() => import("@/components/site/CoverageMap"));
 
 function ZonaPage() {
+  const [selected, setSelected] = useState<Localitate | null>(null);
   return (
     <>
       <PageHero
