@@ -61,29 +61,37 @@ function ZonaPage() {
         </div>
 
         <Reveal>
-          <div className="mt-12 overflow-hidden rounded-2xl border border-border">
-            <iframe
-              title="Hartă Galați"
-              src="https://www.openstreetmap.org/export/embed.html?bbox=27.85%2C45.35%2C28.20%2C45.55&layer=mapnik&marker=45.4353%2C28.0080"
-              width={1152}
-              height={380}
-              className="h-[380px] w-full"
-              loading="lazy"
-            />
+          <div className="relative isolate z-0 mt-12 h-[420px] w-full overflow-hidden rounded-2xl border border-border bg-muted">
+            <ClientOnly fallback={null}>
+              <Suspense fallback={null}>
+                <CoverageMap selected={selected} />
+              </Suspense>
+            </ClientOnly>
           </div>
         </Reveal>
 
         <Reveal>
           <h2 className="mt-14 text-2xl font-bold">Comune deservite în județul Galați</h2>
           <ul className="mt-5 flex flex-wrap gap-2">
-            {COMUNE.map((c) => (
-              <li
-                key={c}
-                className="rounded-full border border-border bg-card px-3.5 py-1.5 text-sm text-muted-foreground"
-              >
-                {c}
-              </li>
-            ))}
+            {COMUNE.map((c) => {
+              const active = selected?.name === c.name;
+              return (
+                <li key={c.name}>
+                  <button
+                    type="button"
+                    onClick={() => setSelected(c)}
+                    aria-pressed={active}
+                    className={
+                      active
+                        ? "rounded-full bg-accent px-3.5 py-1.5 text-sm font-medium text-accent-foreground"
+                        : "rounded-full border border-border bg-card px-3.5 py-1.5 text-sm text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
+                    }
+                  >
+                    {c.name}
+                  </button>
+                </li>
+              );
+            })}
             <li className="rounded-full bg-accent px-3.5 py-1.5 text-sm font-medium text-accent-foreground">
               și restul localităților din județ
             </li>
