@@ -98,6 +98,17 @@ export function Footer() {
             © {new Date().getFullYear()} {CONTACT.name} — Auditor Energetic Gradul I, Galați. Toate
             drepturile rezervate.
           </p>
+          <p className="w-full sm:w-auto">
+            Site realizat de{" "}
+            <a
+              href="https://mtech-design.ro"
+              target="_blank"
+              rel="noopener"
+              className="transition-colors hover:text-primary-glow"
+            >
+              Mtech Design
+            </a>
+          </p>
           <Link to="/auth" className="hover:underline">
             Administrare
           </Link>
