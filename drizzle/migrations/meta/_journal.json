@@ -57,6 +57,13 @@
       "when": 1792157096398,
       "tag": "0007_blog_content_images",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1793032324692,
+      "tag": "0008_tighten_gallery_and_storage_access",
+      "breakpoints": true
     }
   ]
 }
