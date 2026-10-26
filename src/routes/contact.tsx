@@ -18,7 +18,7 @@ import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
 import { CONTACT } from "@/lib/site-data";
 import { supabase } from "@/integrations/supabase/client";
-import { submitAuditRequest } from "@/lib/requests.functions";
+import { createRequestUploadUrls, submitAuditRequest } from "@/lib/requests.functions";
 
 const TITLE = "Contact — Auditor energetic Galați, tel. 0773.932.496";
 const DESC =
@@ -61,6 +61,7 @@ function ContactPage() {
   const [files, setFiles] = useState<File[]>([]);
   const [sending, setSending] = useState(false);
   const submit = useServerFn(submitAuditRequest);
+  const getUploadUrls = useServerFn(createRequestUploadUrls);
 
   function addFiles(list: FileList | null) {
     if (!list) return;
