@@ -89,7 +89,6 @@ function ContactPage() {
     }
     setSending(true);
     try {
-      const folder = crypto.randomUUID();
       const uploaded: {
         path: string;
         file_name: string;
@@ -97,17 +96,24 @@ function ContactPage() {
         size_bytes?: number | undefined;
       }[] = [];
 
-      for (const file of files) {
-        const safeName = file.name.replace(/[^\w.\-]/g, "_");
-        const path = `${folder}/${safeName}`;
-        const { error } = await supabase.storage.from("solicitari").upload(path, file);
-        if (error) throw new Error(`Nu am putut încărca „${file.name}”.`);
-        uploaded.push({
-          path,
-          file_name: file.name,
-          content_type: file.type || undefined,
-          size_bytes: file.size,
+      if (files.length > 0) {
+        const { uploads } = await getUploadUrls({
+          data: { files: files.map((f) => ({ name: f.name, size: f.size })) },
         });
+        for (const [i, file] of files.entries()) {
+          const target = uploads[i];
+          if (!target) throw new Error(`Nu am putut încărca „${file.name}”.`);
+          const { error } = await supabase.storage
+            .from("solicitari")
+            .uploadToSignedUrl(target.path, target.token, file);
+          if (error) throw new Error(`Nu am putut încărca „${file.name}”.`);
+          uploaded.push({
+            path: target.path,
+            file_name: file.name,
+            content_type: file.type || undefined,
+            size_bytes: file.size,
+          });
+        }
       }
 
       const result = await submit({

@@ -1,12 +1,54 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
+const MAX_FILE_BYTES = 25 * 1024 * 1024;
+// Paths are always "<server-generated uuid>/<sanitized name>".
+const PATH_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\/[\w.\-]{1,200}$/i;
+
 const fileSchema = z.object({
-  path: z.string().min(1).max(400),
+  path: z.string().regex(PATH_RE).max(400),
   file_name: z.string().min(1).max(200),
   content_type: z.string().max(120).optional(),
-  size_bytes: z.number().int().nonnegative().max(30 * 1024 * 1024).optional(),
+  size_bytes: z.number().int().nonnegative().max(MAX_FILE_BYTES).optional(),
 });
+
+const uploadRequestSchema = z.object({
+  files: z
+    .array(
+      z.object({
+        name: z.string().min(1).max(200),
+        size: z.number().int().positive().max(MAX_FILE_BYTES),
+      }),
+    )
+    .min(1)
+    .max(10),
+});
+
+// Issues one-time signed upload links for contact-form attachments.
+// The private bucket has no open upload rule; only these links can write to it.
+export const createRequestUploadUrls = createServerFn({ method: "POST" })
+  .inputValidator((data: unknown) => uploadRequestSchema.parse(data))
+  .handler(async ({ data }) => {
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const folder = crypto.randomUUID();
+    const uploads: { path: string; token: string }[] = [];
+    const used = new Set<string>();
+    for (const f of data.files) {
+      let safeName = f.name.replace(/[^\w.\-]/g, "_").replace(/^\.+/, "").slice(0, 180) || "fisier";
+      while (used.has(safeName)) safeName = `1_${safeName}`;
+      used.add(safeName);
+      const path = `${folder}/${safeName}`;
+      const { data: signed, error } = await supabaseAdmin.storage
+        .from("solicitari")
+        .createSignedUploadUrl(path);
+      if (error || !signed) {
+        console.error("Creare link upload eșuată:", error);
+        throw new Error("Nu am putut pregăti încărcarea fișierelor.");
+      }
+      uploads.push({ path: signed.path, token: signed.token });
+    }
+    return { uploads };
+  });
 
 const schema = z.object({
   nume: z.string().trim().min(2).max(120),
